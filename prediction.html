@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Predictions - SalesNova</title>
+
+    <link rel="stylesheet" href="prediction.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         MOBILE MENU BUTTON
+    ====================================================== -->
+
+    <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open menu"
+    >
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+
+    <!-- =====================================================
+         SIDEBAR OVERLAY
+    ====================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <!-- SIDEBAR HEADER -->
+
+        <div class="sidebar-header">
+
+            <div class="sidebar-logo">
+
+                <div class="store-icon">
+
+                    <i class="fa-solid fa-store"></i>
+
+                </div>
+
+                <span
+                    class="logo-text"
+                    id="businessName"
+                >
+                    Loading...
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================== -->
+
+        <nav class="sidebar-nav">
+
+
+            <a
+                href="dashboard.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span class="nav-text">
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="sales.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-cash-register"></i>
+
+                <span class="nav-text">
+                    Sales Entry
+                </span>
+
+            </a>
+
+
+            <a
+                href="products.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-box"></i>
+
+                <span class="nav-text">
+                    Products
+                </span>
+
+            </a>
+
+
+            <a
+                href="prediction.html"
+                class="nav-item active"
+            >
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span class="nav-text">
+                    Predictions
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span class="nav-text">
+                    Settings
+                </span>
+
+            </a>
+
+
+            <!-- LOGOUT -->
+
+            <a
+                href="#"
+                class="nav-item logout"
+                onclick="logout(); return false;"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span class="nav-text">
+                    Logout
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- =================================================
+             SIDEBAR PROFILE
+        ================================================== -->
+
+        <div class="sidebar-profile">
+
+            <img
+                src="profile.jpg"
+                id="sidebarProfileImage"
+                alt="Profile"
+            >
+
+            <div class="sidebar-profile-info">
+
+                <strong id="sidebarProfileName">
+                    Administrator
+                </strong>
+
+                <small>
+                    Account
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <div class="topbar">
+
+
+            <div class="topbar-left">
+
+                <div>
+
+                    <h1>
+                        <i class="fa-solid fa-chart-column"></i>
+                        Business Intelligence
+                    </h1>
+
+                    <p>
+                        Forecast future sales and monitor inventory performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile">
+                Administrator
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PREDICTION CARDS
+        ================================================== -->
+
+        <div class="cards">
+
+
+            <!-- TOMORROW -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-calendar-day"></i>
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Tomorrow's Sales
+                    </h3>
+
+                    <span id="tomorrowSales">
+                        ₦0
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- WEEK -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-calendar-week"></i>
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Weekly Forecast
+                    </h3>
+
+                    <span id="weeklySales">
+                        ₦0
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- MONTH -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Monthly Forecast
+                    </h3>
+
+                    <span id="monthlySales">
+                        ₦0
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- HEALTH -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Business Health
+                    </h3>
+
+                    <span id="healthScore">
+                        0%
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             SALES FORECAST
+        ================================================== -->
+
+        <section class="activity">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        <i class="fa-solid fa-chart-line"></i>
+                        Sales Forecast
+                    </h2>
+
+                    <p>
+                        Estimated future sales based on your recorded sales performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas
+                    id="predictionChart"
+                ></canvas>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             INVENTORY INTELLIGENCE
+        ================================================== -->
+
+        <section class="activity">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        Inventory Intelligence
+                    </h2>
+
+                    <p>
+                        Monitor product performance and identify inventory that needs attention.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table id="inventoryTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Days in Store
+                            </th>
+
+                            <th>
+                                Recommendation
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <!-- JavaScript loads products here -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             BUSINESS RECOMMENDATIONS
+        ================================================== -->
+
+        <section class="activity">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        <i class="fa-solid fa-lightbulb"></i>
+                        Business Recommendations
+                    </h2>
+
+                    <p>
+                        Suggestions based on your current sales and inventory performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div id="recommendations">
+
+                <!-- JavaScript loads recommendations here -->
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             BUSINESS HEALTH
+        ================================================== -->
+
+        <section class="activity">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        Business Health
+                    </h2>
+
+                    <p>
+                        An overall view of your business performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="health-container">
+
+
+                <!-- HEALTH CIRCLE -->
+
+                <div
+                    class="circle"
+                    id="healthCircle"
+                >
+
+                    <div class="circle-inner">
+
+                        <span id="healthCircleScore">
+                            0%
+                        </span>
+
+                        <small>
+                            Health
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HEALTH INFORMATION -->
+
+                <div class="health-info">
+
+                    <h3 id="healthStatus">
+                        Loading...
+                    </h3>
+
+                    <p>
+                        AI evaluates sales, inventory and product performance
+                        to provide an overall business health indication.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     CHART.JS
+====================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/chart.js"
+></script>
+
+
+
+<!-- =====================================================
+     PREDICTION JAVASCRIPT
+====================================================== -->
+
+<script src="prediction.js"></script>
+
+
+
+<!-- =====================================================
+     MOBILE SIDEBAR JAVASCRIPT
+====================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menuToggle =
+        document.getElementById("menuToggle");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const overlay =
+        document.getElementById("sidebarOverlay");
+
+
+    function openSidebar() {
+
+        sidebar.classList.add("mobile-open");
+
+        overlay.classList.add("show");
+
+        document.body.classList.add("sidebar-open");
+
+    }
+
+
+    function closeSidebar() {
+
+        sidebar.classList.remove("mobile-open");
+
+        overlay.classList.remove("show");
+
+        document.body.classList.remove("sidebar-open");
+
+    }
+
+
+    if (menuToggle) {
+
+        menuToggle.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    sidebar.classList.contains(
+                        "mobile-open"
+                    )
+                ) {
+
+                    closeSidebar();
+
+                } else {
+
+                    openSidebar();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    if (overlay) {
+
+        overlay.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+    }
+
+
+    document
+        .querySelectorAll(".sidebar .nav-item")
+        .forEach(function (item) {
+
+            item.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        window.innerWidth <= 768
+                    ) {
+
+                        closeSidebar();
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            if (
+                window.innerWidth > 768
+            ) {
+
+                closeSidebar();
+
+            }
+
+        }
+    );
+
+});
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+/* THEME VARIABLES */
+
+:root {
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #dbe3ee;
+    --primary: #0ea5e9;
+    --primary-dark: #2563eb;
+}
+
+body.dark-mode {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --border: #334155;
+    --primary: #38bdf8;
+    --primary-dark: #2563eb;
+}
+
+/* GLOBAL THEME */
+
+html,
+body {
+    background: var(--bg);
+    color: var(--text);
+}

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sales Entry - SalesAI</title>
+
+    <link rel="stylesheet" href="/sales.css">
+    <script src="theme.js"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="sidebar-logo">
+
+                <div class="store-icon">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+
+                <span
+                    class="logo-text"
+                    id="businessName"
+                >
+                    Business
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SIDEBAR NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="dashboard.html"
+                class="nav-item"
+            >
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span class="nav-text">
+                    Dashboard
+                </span>
+            </a>
+
+
+            <a
+                href="sales.html"
+                class="nav-item active"
+            >
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span class="nav-text">
+                    Sales Entry
+                </span>
+            </a>
+
+
+            <a
+                href="products.html"
+                class="nav-item"
+            >
+                <i class="fa-solid fa-boxes-stacked"></i>
+
+                <span class="nav-text">
+                    Products
+                </span>
+            </a>
+
+
+            <a
+                href="prediction.html"
+                class="nav-item"
+            >
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                <span class="nav-text">
+                    Prediction
+                </span>
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="nav-item"
+            >
+                <i class="fa-solid fa-gear"></i>
+
+                <span class="nav-text">
+                    Settings
+                </span>
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-item logout"
+                onclick="logout(); return false;"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span class="nav-text">
+                    Logout
+                </span>
+            </a>
+
+        </nav>
+
+
+        <!-- SIDEBAR PROFILE -->
+
+        <div class="sidebar-profile">
+
+            <img
+                id="topProfileImage"
+                src="/static/images/default-profile.png"
+                alt="Profile"
+            >
+
+            <div class="sidebar-profile-info">
+
+                <strong id="sidebarOwnerName">
+                    Business Owner
+                </strong>
+
+                <small>
+                    Administrator
+                </small>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    type="button"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div>
+
+                    <h1 id="welcomeText">
+                        Sales Entry
+                    </h1>
+
+                    <p>
+                        Record every completed sale.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile">
+                Administrator
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SALES FORM
+        ================================================== -->
+
+        <div class="activity sales-form-card">
+
+            <h2>
+                <i class="fa-solid fa-cart-plus"></i>
+                Record New Sale
+            </h2>
+
+
+            <form id="salesForm">
+
+                <label for="product">
+                    Product
+                </label>
+
+                <select
+                    id="product"
+                    required
+                >
+
+                    <option value="">
+                        Select Product
+                    </option>
+
+                </select>
+
+
+                <label for="availableStock">
+                    Available Stock
+                </label>
+
+                <input
+                    type="text"
+                    id="availableStock"
+                    value="0"
+                    readonly
+                >
+
+
+                <label for="quantity">
+                    Quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="quantity"
+                    min="1"
+                    required
+                    placeholder="Enter quantity"
+                >
+
+
+                <label for="price">
+                    Unit Price (₦)
+                </label>
+
+                <input
+                    type="number"
+                    id="price"
+                    readonly
+                >
+
+
+                <label for="total">
+                    Total (₦)
+                </label>
+
+                <input
+                    type="number"
+                    id="total"
+                    readonly
+                >
+
+
+                <button
+                    type="submit"
+                    id="saveSaleBtn"
+                >
+
+                    <i class="fa-solid fa-check"></i>
+
+                    <span>
+                        Save Sale
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <!-- FORM MESSAGE -->
+
+            <p id="message"></p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SALES HISTORY
+        ================================================== -->
+
+        <div class="activity sales-history-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        Sales History
+                    </h2>
+
+                    <p class="section-description">
+                        View and manage your recorded sales.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TABLE WRAPPER -->
+
+            <div class="sales-table-wrapper">
+
+                <table id="salesTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Quantity
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="salesBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     MOBILE SIDEBAR OVERLAY
+====================================================== -->
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+>
+</div>
+
+
+
+<!-- =====================================================
+     CUSTOM ALERT
+====================================================== -->
+
+<div
+    class="alert-container"
+    id="alertContainer"
+>
+
+</div>
+
+
+
+<!-- =====================================================
+     DELETE CONFIRMATION MODAL
+====================================================== -->
+
+<div
+    class="delete-modal"
+    id="deleteModal"
+>
+
+    <div class="delete-modal-content">
+
+        <div class="delete-modal-icon">
+
+            <i class="fa-solid fa-trash"></i>
+
+        </div>
+
+
+        <h3>
+            Delete Sale?
+        </h3>
+
+
+        <p>
+            Are you sure you want to delete this sale?
+            This action cannot be undone.
+        </p>
+
+
+        <div class="delete-modal-buttons">
+
+            <button
+                type="button"
+                class="cancel-delete-btn"
+                id="cancelDeleteBtn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                class="confirm-delete-btn"
+                id="confirmDeleteBtn"
+            >
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="sales.js"></script>
+
+
+<script>
+
+async function logout() {
+
+    try {
+
+        await fetch(
+            "http://127.0.0.1:5000/logout",
+            {
+                credentials: "include"
+            }
+        );
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+    window.location.href = "login.html";
+
+}
+
+
+
+const menuToggle =
+    document.getElementById("menuToggle");
+
+const sidebar =
+    document.querySelector(".sidebar");
+
+const sidebarOverlay =
+    document.getElementById("sidebarOverlay");
+
+
+
+if (menuToggle) {
+
+    menuToggle.addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.toggle(
+                "mobile-open"
+            );
+
+            sidebarOverlay.classList.toggle(
+                "show"
+            );
+
+        }
+    );
+
+}
+
+
+
+if (sidebarOverlay) {
+
+    sidebarOverlay.addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.remove(
+                "mobile-open"
+            );
+
+            sidebarOverlay.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

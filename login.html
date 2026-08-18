@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login - SalesAI</title>
+
+<link rel="stylesheet" href="project.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="auth-body">
+
+<div class="auth-container">
+
+<div class="auth-card">
+
+<div class="auth-logo">
+SalesNova
+</div>
+
+<h1>Welcome Back</h1>
+
+<p>
+Login to continue managing your business.
+</p>
+
+<div
+id="message"
+class="auth-message">
+</div>
+
+<form id="loginForm">
+
+<div class="form-group">
+
+<label>Email Address</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter your email"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Password</label>
+
+<div class="password-wrapper">
+
+<input
+type="password"
+id="password"
+placeholder="Enter your password"
+required>
+
+<span
+class="toggle-password"
+onclick="togglePassword()">
+👁
+</span>
+
+</div>
+
+</div>
+
+<div class="forgot-password">
+
+<a href="forgot_password.html">
+
+Forgot Password?
+
+</a>
+
+</div>
+
+<button
+type="submit"
+class="auth-btn"
+id="loginBtn">
+
+<div
+class="spinner"
+id="spinner">
+</div>
+
+<span id="btnText">
+
+Login
+
+</span>
+
+</button>
+
+</form>
+
+<div class="auth-link">
+
+Don't have an account?
+
+<a href="signup.html">
+
+Create Account
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// =========================
+// SHOW PASSWORD
+// =========================
+
+function togglePassword(){
+
+const input=document.getElementById("password");
+
+if(input.type==="password"){
+
+input.type="text";
+
+event.target.innerHTML="🙈";
+
+}else{
+
+input.type="password";
+
+event.target.innerHTML="👁";
+
+}
+
+}
+
+
+
+// =========================
+// LOGIN
+// =========================
+
+document.getElementById("loginForm")
+
+.addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+const email=document.getElementById("email").value.trim().toLowerCase();
+
+const password=document.getElementById("password").value;
+
+const message=document.getElementById("message");
+
+const spinner=document.getElementById("spinner");
+
+const btn=document.getElementById("loginBtn");
+
+const btnText=document.getElementById("btnText");
+
+message.className="auth-message";
+
+message.style.display="none";
+
+
+// =========================
+// EMAIL VALIDATION
+// =========================
+
+const emailPattern=/^[A-Za-z0-9._%+-]+@gmail\.com$/i;
+
+if(!emailPattern.test(email)){
+
+message.classList.add("error-message");
+
+message.style.display="block";
+
+message.innerHTML="Please enter a valid email address.";
+
+return;
+
+}
+
+
+spinner.style.display="block";
+
+btn.disabled=true;
+
+btnText.innerHTML="Signing In...";
+
+try{
+
+const response=await fetch(
+
+"http://127.0.0.1:5000/login",
+
+{
+
+method:"POST",
+
+credentials:"include",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+email,
+
+password
+
+})
+
+}
+
+);
+
+const result=await response.json();
+
+spinner.style.display="none";
+
+btn.disabled=false;
+
+btnText.innerHTML="Login";
+
+if(result.message){
+
+message.classList.add("success-message");
+
+message.style.display="block";
+
+message.innerHTML="Login successful...";
+
+setTimeout(function(){
+
+window.location.href="dashboard.html";
+
+},1000);
+
+}else{
+
+message.classList.add("error-message");
+
+message.style.display="block";
+
+message.innerHTML=result.error;
+
+}
+
+}
+
+catch(error){
+
+spinner.style.display="none";
+
+btn.disabled=false;
+
+btnText.innerHTML="Login";
+
+message.classList.add("error-message");
+
+message.style.display="block";
+
+message.innerHTML="Unable to connect to the server.";
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>

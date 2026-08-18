@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Shrek stores</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Settings CSS -->
+   <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+
+<!-- =====================================================
+     MOBILE MENU BUTTON
+===================================================== -->
+
+<button class="mobile-menu-btn" id="mobileMenuBtn">
+    <i class="fa-solid fa-bars"></i>
+</button>
+
+
+<!-- =====================================================
+     MOBILE OVERLAY
+===================================================== -->
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<div class="app-container">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- SIDEBAR HEADER -->
+
+        <div class="sidebar-header">
+
+            <div class="sidebar-logo">
+
+                <span class="store-icon">
+                    <i class="fa-solid fa-store"></i>
+                </span>
+
+                <span class="logo-text">
+                    Shrek stores
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================== -->
+
+        <nav class="sidebar-nav">
+
+
+            <!-- DASHBOARD -->
+
+            <a href="dashboard.html" class="nav-item">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span class="nav-text">
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <!-- SALES -->
+
+            <a href="sales.html" class="nav-item">
+
+                <i class="fa-solid fa-cash-register"></i>
+
+                <span class="nav-text">
+                    Sales Entry
+                </span>
+
+            </a>
+
+
+            <!-- PRODUCTS -->
+
+            <a href="products.html" class="nav-item">
+
+                <i class="fa-solid fa-box"></i>
+
+                <span class="nav-text">
+                    Products
+                </span>
+
+            </a>
+
+
+            <!-- PREDICTIONS -->
+
+            <a href="prediction.html" class="nav-item">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span class="nav-text">
+                    Predictions
+                </span>
+
+            </a>
+
+
+            <!-- SETTINGS -->
+
+            <a href="settings.html"
+               class="nav-item active">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span class="nav-text">
+                    Settings
+                </span>
+
+            </a>
+
+
+            <!-- LOGOUT -->
+
+            <a href="#"
+               class="nav-item logout"
+               id="logoutBtn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span class="nav-text">
+                    Logout
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             SIDEBAR PROFILE
+        ================================================== -->
+
+        <div class="sidebar-profile">
+
+            <img
+                src=""
+                id="sidebarProfileImage"
+                alt="Profile"
+            >
+
+            <div class="sidebar-profile-info">
+
+                <strong id="sidebarUserName">
+                    Loading...
+                </strong>
+
+                <small>
+                    Business Owner
+                </small>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="settings-header">
+
+            <div class="header-title">
+
+                <h1>
+                    Settings
+                </h1>
+
+                <p>
+                    Manage your account and preferences
+                </p>
+
+            </div>
+
+
+            <!-- APPEARANCE BUTTON -->
+
+            <button
+                class="theme-button"
+                id="themeButton"
+                type="button"
+            >
+
+                <i class="fa-solid fa-moon"
+                   id="themeIcon"></i>
+
+                <span id="themeText">
+                    Dark Mode
+                </span>
+
+            </button>
+
+        </header>
+
+
+
+        <!-- =================================================
+             SETTINGS CONTENT
+        ================================================== -->
+
+        <section class="settings-container">
+
+
+            <!-- =================================================
+                 PROFILE
+            ================================================== -->
+
+            <div class="profile-section">
+
+                <div class="profile-image-wrapper">
+
+                    <img
+                        src=""
+                        alt="Profile Picture"
+                        id="profileImage"
+                        class="profile-photo"
+                    >
+
+                    <label
+                        for="profilePicture"
+                        class="camera-button"
+                        title="Change profile picture"
+                    >
+
+                        <i class="fa-solid fa-camera"></i>
+
+                    </label>
+
+                </div>
+
+
+                <input
+                    type="file"
+                    id="profilePicture"
+                    accept="image/png,image/jpeg,image/jpg,image/webp"
+                >
+
+
+                <h2 id="profileName">
+                    Loading...
+                </h2>
+
+                <p
+                    class="profile-role"
+                    id="profileBusiness"
+                >
+                    Business Owner
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SETTINGS OPTIONS
+            ================================================== -->
+
+            <div class="settings-options">
+
+
+                <!-- PROFILE INFORMATION -->
+
+                <button
+                    type="button"
+                    class="setting-card"
+                    id="profileInfoBtn"
+                >
+
+                    <div class="setting-icon">
+
+                        <i class="fa-regular fa-user"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Profile Information
+                        </h3>
+
+                        <p>
+                            View and update your personal information
+                        </p>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right setting-arrow"></i>
+
+                </button>
+
+
+
+                <!-- CHANGE PASSWORD -->
+
+                <button
+                    type="button"
+                    class="setting-card"
+                    id="passwordBtn"
+                >
+
+                    <div class="setting-icon">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Change Password
+                        </h3>
+
+                        <p>
+                            Update your account password
+                        </p>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right setting-arrow"></i>
+
+                </button>
+
+
+
+                <!-- NOTIFICATIONS -->
+
+                <div class="setting-card">
+
+                    <div class="setting-icon">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Notifications
+                        </h3>
+
+                        <p>
+                            Manage your notification preferences
+                        </p>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notificationToggle"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- APPEARANCE -->
+
+                <button
+                    type="button"
+                    class="setting-card"
+                    id="appearanceBtn"
+                >
+
+                    <div class="setting-icon">
+
+                        <i class="fa-solid fa-palette"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Appearance
+                        </h3>
+
+                        <p>
+                            Customize the look and feel of the app
+                        </p>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right setting-arrow"></i>
+
+                </button>
+
+
+
+                <!-- SECURITY -->
+
+                <button
+                    type="button"
+                    class="setting-card"
+                    id="securityBtn"
+                >
+
+                    <div class="setting-icon">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Security
+                        </h3>
+
+                        <p>
+                            Manage your account security
+                        </p>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right setting-arrow"></i>
+
+                </button>
+
+
+
+                <!-- DATA & PRIVACY -->
+
+                <button
+                    type="button"
+                    class="setting-card"
+                    id="privacyBtn"
+                >
+
+                    <div class="setting-icon">
+
+                        <i class="fa-solid fa-database"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Data & Privacy
+                        </h3>
+
+                        <p>
+                            Manage your data and privacy settings
+                        </p>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right setting-arrow"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DIVIDER
+            ================================================== -->
+
+            <div class="settings-divider"></div>
+
+
+
+            <!-- =================================================
+                 DELETE ACCOUNT
+            ================================================== -->
+
+            <button
+                type="button"
+                class="setting-card delete-card"
+                id="deleteAccountBtn"
+            >
+
+                <div class="delete-icon">
+
+                    <i class="fa-regular fa-trash-can"></i>
+
+                </div>
+
+
+                <div class="setting-info">
+
+                    <h3>
+                        Delete Account
+                    </h3>
+
+                    <p>
+                        Permanently delete your account and all data
+                    </p>
+
+                </div>
+
+
+                <i class="fa-solid fa-chevron-right delete-arrow"></i>
+
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="settings-footer">
+
+            © 2025 Shrek stores. All rights reserved.
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     PROFILE INFORMATION MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="profileModal"
+>
+
+    <div class="modal">
+
+        <button
+            class="modal-close"
+            data-close="profileModal"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+
+        <div class="modal-header">
+
+            <div class="modal-title-icon">
+                <i class="fa-regular fa-user"></i>
+            </div>
+
+            <div>
+                <h2>
+                    Profile Information
+                </h2>
+
+                <p>
+                    Update your business profile
+                </p>
+            </div>
+
+        </div>
+
+
+        <form id="profileForm">
+
+            <div class="settings-grid">
+
+
+                <div>
+
+                    <label for="fullname">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullname"
+                        class="setting-input"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="business">
+                        Business Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="business"
+                        class="setting-input"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        class="setting-input"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        class="setting-input"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="category">
+                        Business Category
+                    </label>
+
+                    <input
+                        type="text"
+                        id="category"
+                        class="setting-input"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="address">
+                        Business Address
+                    </label>
+
+                    <input
+                        type="text"
+                        id="address"
+                        class="setting-input"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-field">
+
+                <label for="description">
+                    Business Description
+                </label>
+
+                <textarea
+                    id="description"
+                    class="setting-textarea"
+                    placeholder="Tell us about your business..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    data-close="profileModal"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     CHANGE PASSWORD MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="passwordModal"
+>
+
+    <div class="modal small-modal">
+
+        <button
+            class="modal-close"
+            data-close="passwordModal"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-header">
+
+            <div class="modal-title-icon">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <div>
+
+                <h2>
+                    Change Password
+                </h2>
+
+                <p>
+                    Keep your account secure
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="passwordForm">
+
+
+            <div class="modal-field">
+
+                <label for="currentPassword">
+                    Current Password
+                </label>
+
+                <div class="password-input">
+
+                    <input
+                        type="password"
+                        id="currentPassword"
+                        class="setting-input"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-eye"
+                        data-target="currentPassword"
+                    >
+
+                        <i class="fa-regular fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-field">
+
+                <label for="newPassword">
+                    New Password
+                </label>
+
+                <div class="password-input">
+
+                    <input
+                        type="password"
+                        id="newPassword"
+                        class="setting-input"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-eye"
+                        data-target="newPassword"
+                    >
+
+                        <i class="fa-regular fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-field">
+
+                <label for="confirmPassword">
+                    Confirm New Password
+                </label>
+
+                <div class="password-input">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        class="setting-input"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-eye"
+                        data-target="confirmPassword"
+                    >
+
+                        <i class="fa-regular fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="password-requirements">
+
+                <p>
+                    <i class="fa-solid fa-circle-info"></i>
+                    Use a strong password that you don't use elsewhere.
+                </p>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    data-close="passwordModal"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+
+                    <i class="fa-solid fa-key"></i>
+
+                    Update Password
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     APPEARANCE MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="appearanceModal"
+>
+
+    <div class="modal small-modal">
+
+        <button
+            class="modal-close"
+            data-close="appearanceModal"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-header">
+
+            <div class="modal-title-icon">
+                <i class="fa-solid fa-palette"></i>
+            </div>
+
+            <div>
+
+                <h2>
+                    Appearance
+                </h2>
+
+                <p>
+                    Customize your interface
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="appearance-options">
+
+
+            <button
+                type="button"
+                class="appearance-option active"
+                data-theme="dark"
+            >
+
+                <div class="appearance-preview dark-preview">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Dark
+                    </strong>
+
+                    <small>
+                        Futuristic dark interface
+                    </small>
+
+                </div>
+
+                <i class="fa-solid fa-check appearance-check"></i>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="appearance-option"
+                data-theme="light"
+            >
+
+                <div class="appearance-preview light-preview">
+                    <i class="fa-solid fa-sun"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Light
+                    </strong>
+
+                    <small>
+                        Clean light interface
+                    </small>
+
+                </div>
+
+                <i class="fa-solid fa-check appearance-check"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SECURITY MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="securityModal"
+>
+
+    <div class="modal small-modal">
+
+        <button
+            class="modal-close"
+            data-close="securityModal"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-header">
+
+            <div class="modal-title-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+
+                <h2>
+                    Security
+                </h2>
+
+                <p>
+                    Keep your account protected
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="security-list">
+
+
+            <div class="security-item">
+
+                <div class="security-item-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Account Email
+                    </strong>
+
+                    <span id="securityEmail">
+                        Loading...
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-circle-check security-good"></i>
+
+            </div>
+
+
+            <div class="security-item">
+
+                <div class="security-item-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Password
+                    </strong>
+
+                    <span>
+                        Protected with encryption
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-circle-check security-good"></i>
+
+            </div>
+
+
+            <div class="security-item">
+
+                <div class="security-item-icon">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Account Protection
+                    </strong>
+
+                    <span>
+                        Session authentication enabled
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-circle-check security-good"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     DATA & PRIVACY MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="privacyModal"
+>
+
+    <div class="modal">
+
+        <button
+            class="modal-close"
+            data-close="privacyModal"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-header">
+
+            <div class="modal-title-icon">
+                <i class="fa-solid fa-database"></i>
+            </div>
+
+            <div>
+
+                <h2>
+                    Data & Privacy
+                </h2>
+
+                <p>
+                    Understand and manage your data
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="privacy-content">
+
+            <div class="privacy-box">
+
+                <i class="fa-solid fa-database"></i>
+
+                <div>
+
+                    <h3>
+                        Your Business Data
+                    </h3>
+
+                    <p>
+                        Your sales, products and profile information
+                        are associated with your account.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="privacy-box">
+
+                <i class="fa-solid fa-user-lock"></i>
+
+                <div>
+
+                    <h3>
+                        Privacy
+                    </h3>
+
+                    <p>
+                        Your business information is only available
+                        to your authenticated account.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="privacy-box">
+
+                <i class="fa-solid fa-shield"></i>
+
+                <div>
+
+                    <h3>
+                        Account Security
+                    </h3>
+
+                    <p>
+                        Your password is stored using secure password
+                        hashing.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     DELETE ACCOUNT MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="deleteModal"
+>
+
+    <div class="modal small-modal delete-modal">
+
+        <div class="delete-warning-icon">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+        </div>
+
+
+        <h2>
+            Delete Account?
+        </h2>
+
+
+        <p>
+            This action is permanent. Your profile, sales and
+            product data will be deleted.
+        </p>
+
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="btn-secondary"
+                data-close="deleteModal"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="btn-danger"
+                id="confirmDeleteBtn"
+            >
+
+                <i class="fa-regular fa-trash-can"></i>
+
+                Delete Account
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOAST NOTIFICATION
+===================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span id="toastMessage">
+        Success
+    </span>
+
+</div>
+<script src="settings.js"></script>
+</body>
+</html>

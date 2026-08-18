@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SalesAI Dashboard</title>
+
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="sidebar-logo">
+
+                <span class="store-icon">
+
+                    <i class="fa-solid fa-store"></i>
+
+                </span>
+
+                <span
+                    class="logo-text"
+                    id="businessName"
+                >
+                    Loading...
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="dashboard.html"
+                class="nav-item active"
+            >
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span class="nav-text">
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="sales.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-cash-register"></i>
+
+                <span class="nav-text">
+                    Sales Entry
+                </span>
+
+            </a>
+
+
+            <a
+                href="products.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-box"></i>
+
+                <span class="nav-text">
+                    Products
+                </span>
+
+            </a>
+
+
+            <a
+                href="prediction.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span class="nav-text">
+                    Predictions
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span class="nav-text">
+                    Settings
+                </span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-item logout"
+                id="logoutBtn"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span class="nav-text">
+                    Logout
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- SIDEBAR PROFILE -->
+
+        <div class="sidebar-profile">
+
+            <img
+                src=""
+                id="sidebarProfileImage"
+                alt="Profile"
+            >
+
+            <div class="sidebar-profile-info">
+
+                <strong id="sidebarUserName">
+                    Loading...
+                </strong>
+
+                <small>
+                    Business Owner
+                </small>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MOBILE OVERLAY -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    >
+    </div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <div class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    id="menuToggle"
+                    class="menu-toggle"
+                    type="button"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div>
+
+                    <h1 id="welcomeText">
+                        Welcome Back 👋
+                    </h1>
+
+                    <p>
+                        Smart Sales Dashboard
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTIFICATIONS -->
+
+            <div class="notification-wrapper">
+
+                <button
+                    id="notificationBtn"
+                    class="notification-btn"
+                    type="button"
+                    aria-label="Notifications"
+                >
+
+                    <i class="fa-solid fa-bell"></i>
+
+                    <span
+                        id="notificationCount"
+                        class="notification-count"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <div
+                    id="notificationPanel"
+                    class="notification-panel"
+                >
+
+                    <div class="notification-header">
+
+                        <strong>
+                            Notifications
+                        </strong>
+
+                        <button
+                            id="markAllReadBtn"
+                            type="button"
+                        >
+                            Mark all as read
+                        </button>
+
+                    </div>
+
+
+                    <div id="notificationList">
+
+                        <p class="no-notifications">
+                            No stock alerts 🎉
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROFILE -->
+
+            <div class="profile">
+
+                <i class="fa-solid fa-store"></i>
+
+                <span>
+                    Sales Dashboard
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DASHBOARD CARDS
+        ================================================== -->
+
+        <div class="cards">
+
+
+            <!-- TOTAL REVENUE -->
+
+            <div class="card">
+
+                <h3>
+                    💰 Total Revenue
+                </h3>
+
+                <span id="totalSales">
+                    ₦0
+                </span>
+
+            </div>
+
+
+            <!-- PRODUCTS SOLD -->
+
+            <div class="card">
+
+                <h3>
+                    📦 Products Sold
+                </h3>
+
+                <span id="productsSold">
+                    0
+                </span>
+
+            </div>
+
+
+            <!-- TRANSACTIONS -->
+
+            <div class="card">
+
+                <h3>
+                    🧾 Transactions
+                </h3>
+
+                <span id="transactions">
+                    0
+                </span>
+
+            </div>
+
+
+            <!-- BEST SELLER -->
+
+            <div class="card">
+
+                <h3>
+                    ⭐ Best Seller
+                </h3>
+
+                <span id="bestSeller">
+                    None
+                </span>
+
+            </div>
+
+
+            <!-- TODAY SALES -->
+
+            <div class="card">
+
+                <h3>
+                    📅 Today's Sales
+                </h3>
+
+                <span id="todaySales">
+                    ₦0
+                </span>
+
+            </div>
+
+
+            <!-- TOMORROW PREDICTION -->
+
+            <div class="card">
+
+                <h3>
+                    🔮 Tomorrow Prediction
+                </h3>
+
+                <span id="prediction">
+                    ₦0
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             BUSINESS PERFORMANCE OVERVIEW
+        ====================================================== -->
+
+        <div class="activity performance-overview">
+
+
+            <div class="activity-header">
+
+                <div>
+
+                    <h2>
+
+                        <i class="fa-solid fa-chart-pie"></i>
+
+                        Business Performance Overview
+
+                    </h2>
+
+                    <p class="activity-description">
+
+                        A quick overview of your current business performance.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PERFORMANCE GRID -->
+
+            <div class="performance-grid">
+
+
+                <!-- SALES PERFORMANCE -->
+
+                <div class="performance-item">
+
+                    <div class="performance-icon">
+
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+
+                    </div>
+
+
+                    <div class="performance-content">
+
+                        <span class="performance-label">
+                            Sales Performance
+                        </span>
+
+                        <strong id="performanceSales">
+                            ₦0
+                        </strong>
+
+                        <small>
+                            Total revenue generated
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- AVERAGE SALE -->
+
+                <div class="performance-item">
+
+                    <div class="performance-icon">
+
+                        <i class="fa-solid fa-calculator"></i>
+
+                    </div>
+
+
+                    <div class="performance-content">
+
+                        <span class="performance-label">
+                            Average Sale Value
+                        </span>
+
+                        <strong id="averageSale">
+                            ₦0
+                        </strong>
+
+                        <small>
+                            Average per transaction
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TRANSACTION ACTIVITY -->
+
+                <div class="performance-item">
+
+                    <div class="performance-icon">
+
+                        <i class="fa-solid fa-receipt"></i>
+
+                    </div>
+
+
+                    <div class="performance-content">
+
+                        <span class="performance-label">
+                            Transaction Activity
+                        </span>
+
+                        <strong id="performanceTransactions">
+                            0
+                        </strong>
+
+                        <small>
+                            Completed transactions
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PREDICTION -->
+
+                <div class="performance-item">
+
+                    <div class="performance-icon">
+
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                    </div>
+
+
+                    <div class="performance-content">
+
+                        <span class="performance-label">
+                            Forecast
+                        </span>
+
+                        <strong id="performancePrediction">
+                            ₦0
+                        </strong>
+
+                        <small>
+                            Expected sales tomorrow
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             BUSINESS INSIGHT
+        ====================================================== -->
+
+        <div class="activity business-insight-card">
+
+            <h2>
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+                Business Insight
+
+            </h2>
+
+
+            <p id="businessInsight">
+
+                Your business performance information will appear here.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             SALES ANALYTICS
+        ====================================================== -->
+
+        <div class="activity">
+
+            <h2>
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                Sales Analytics
+
+            </h2>
+
+
+            <p>
+
+                This graph automatically displays your sales trend.
+
+            </p>
+
+
+            <div class="chart-container">
+
+                <canvas id="salesChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     CHART.JS
+====================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+<script>
+
+/* =========================================================
+   LOAD USER
+========================================================= */
+
+async function loadUser() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/user",
+            {
+                credentials: "include"
+            }
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load user"
+            );
+
+        }
+
+
+        const user =
+            await response.json();
+
+
+        if (user.error) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        /* BUSINESS NAME */
+
+        const businessName =
+            document.getElementById(
+                "businessName"
+            );
+
+
+        if (businessName) {
+
+            businessName.innerText =
+                user.business ||
+                "Business";
+
+        }
+
+
+        /* WELCOME TEXT */
+
+        const welcomeText =
+            document.getElementById(
+                "welcomeText"
+            );
+
+
+        if (welcomeText) {
+
+            welcomeText.innerText =
+                "Welcome back, " +
+                (user.fullname || "User") +
+                " 👋";
+
+        }
+
+
+        /* SIDEBAR USER NAME */
+
+        const sidebarUserName =
+            document.getElementById(
+                "sidebarUserName"
+            );
+
+
+        if (sidebarUserName) {
+
+            sidebarUserName.innerText =
+                user.fullname ||
+                "Administrator";
+
+        }
+
+
+        /* PROFILE IMAGE */
+
+        const sidebarProfileImage =
+            document.getElementById(
+                "sidebarProfileImage"
+            );
+
+
+        if (
+            sidebarProfileImage &&
+            user.profile_image
+        ) {
+
+            sidebarProfileImage.src =
+                user.profile_image +
+                "?t=" +
+                Date.now();
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "User loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   LOAD DASHBOARD STATISTICS
+========================================================= */
+
+async function loadDashboardStats() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/dashboard_stats",
+            {
+                credentials: "include"
+            }
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load dashboard statistics"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (data.error) {
+
+            return;
+
+        }
+
+
+        /* TOTAL SALES */
+
+        const totalSales =
+            document.getElementById(
+                "totalSales"
+            );
+
+
+        if (totalSales) {
+
+            totalSales.innerText =
+                "₦" +
+                Number(
+                    data.total_sales || 0
+                ).toLocaleString();
+
+        }
+
+
+        /* PRODUCTS SOLD */
+
+        const productsSold =
+            document.getElementById(
+                "productsSold"
+            );
+
+
+        if (productsSold) {
+
+            productsSold.innerText =
+                data.products_sold || 0;
+
+        }
+
+
+        /* TRANSACTIONS */
+
+        const transactions =
+            document.getElementById(
+                "transactions"
+            );
+
+
+        if (transactions) {
+
+            transactions.innerText =
+                data.transactions || 0;
+
+        }
+
+
+        /* BEST SELLER */
+
+        const bestSeller =
+            document.getElementById(
+                "bestSeller"
+            );
+
+
+        if (bestSeller) {
+
+            bestSeller.innerText =
+                data.best_seller ||
+                "None";
+
+        }
+
+
+        /* TODAY'S SALES */
+
+        const todaySales =
+            document.getElementById(
+                "todaySales"
+            );
+
+
+        if (todaySales) {
+
+            todaySales.innerText =
+                "₦" +
+                Number(
+                    data.today_sales || 0
+                ).toLocaleString();
+
+        }
+
+
+        /* =================================================
+           PERFORMANCE OVERVIEW
+        ================================================= */
+
+
+        const performanceSales =
+            document.getElementById(
+                "performanceSales"
+            );
+
+
+        if (performanceSales) {
+
+            performanceSales.innerText =
+                "₦" +
+                Number(
+                    data.total_sales || 0
+                ).toLocaleString();
+
+        }
+
+
+        const performanceTransactions =
+            document.getElementById(
+                "performanceTransactions"
+            );
+
+
+        if (performanceTransactions) {
+
+            performanceTransactions.innerText =
+                data.transactions || 0;
+
+        }
+
+
+        /* =================================================
+           AVERAGE SALE VALUE
+        ================================================= */
+
+        const averageSale =
+            document.getElementById(
+                "averageSale"
+            );
+
+
+        if (averageSale) {
+
+            const total =
+                Number(
+                    data.total_sales || 0
+                );
+
+
+            const transactionCount =
+                Number(
+                    data.transactions || 0
+                );
+
+
+            let average = 0;
+
+
+            if (transactionCount > 0) {
+
+                average =
+                    total /
+                    transactionCount;
+
+            }
+
+
+            averageSale.innerText =
+                "₦" +
+                average.toLocaleString(
+                    undefined,
+                    {
+                        maximumFractionDigits: 2
+                    }
+                );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Dashboard stats error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   LOAD PREDICTION
+========================================================= */
+
+async function loadPrediction() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/prediction",
+            {
+                credentials: "include"
+            }
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load prediction"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (data.error) {
+
+            return;
+
+        }
+
+
+        const predictionValue =
+            Number(
+                data.prediction || 0
+            );
+
+
+        /* MAIN CARD */
+
+        const prediction =
+            document.getElementById(
+                "prediction"
+            );
+
+
+        if (prediction) {
+
+            prediction.innerText =
+                "₦" +
+                predictionValue.toLocaleString();
+
+        }
+
+
+        /* PERFORMANCE OVERVIEW */
+
+        const performancePrediction =
+            document.getElementById(
+                "performancePrediction"
+            );
+
+
+        if (performancePrediction) {
+
+            performancePrediction.innerText =
+                "₦" +
+                predictionValue.toLocaleString();
+
+        }
+
+
+        /* =================================================
+           BUSINESS INSIGHT
+        ================================================= */
+
+        const businessInsight =
+            document.getElementById(
+                "businessInsight"
+            );
+
+
+        if (businessInsight) {
+
+            if (predictionValue > 0) {
+
+                businessInsight.innerText =
+                    "Your system currently estimates approximately ₦" +
+                    predictionValue.toLocaleString() +
+                    " in sales for tomorrow. Keep monitoring your sales trend and inventory levels.";
+
+            }
+
+            else {
+
+                businessInsight.innerText =
+                    "Add more sales records to generate a more useful sales forecast.";
+
+            }
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Prediction error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   LOAD STOCK NOTIFICATIONS
+========================================================= */
+
+async function loadNotifications() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/low_stock",
+            {
+                credentials: "include"
+            }
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load stock alerts"
+            );
+
+        }
+
+
+        const products =
+            await response.json();
+
+
+        const notificationList =
+            document.getElementById(
+                "notificationList"
+            );
+
+
+        const notificationCount =
+            document.getElementById(
+                "notificationCount"
+            );
+
+
+        if (
+            !notificationList ||
+            !notificationCount
+        ) {
+
+            return;
+
+        }
+
+
+        if (!Array.isArray(products)) {
+
+            notificationCount.innerText =
+                "0";
+
+
+            notificationList.innerHTML = `
+
+                <p class="no-notifications">
+
+                    Unable to load stock alerts.
+
+                </p>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* NO ALERTS */
+
+        if (products.length === 0) {
+
+            notificationCount.innerText =
+                "0";
+
+
+            notificationList.innerHTML = `
+
+                <p class="no-notifications">
+
+                    No stock alerts 🎉
+
+                </p>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* =================================================
+           GET READ NOTIFICATIONS
+        ================================================= */
+
+        let readNotifications =
+            JSON.parse(
+                localStorage.getItem(
+                    "salesnova_read_notifications"
+                )
+            ) || [];
+
+
+        /* =================================================
+           CURRENT IDS
+        ================================================= */
+
+        const currentNotificationIds =
+            products.map(
+                function (product) {
+
+                    return (
+                        String(product.id) +
+                        "_" +
+                        String(product.stock)
+                    );
+
+                }
+            );
+
+
+        readNotifications =
+            readNotifications.filter(
+                function (id) {
+
+                    return currentNotificationIds.includes(
+                        id
+                    );
+
+                }
+            );
+
+
+        localStorage.setItem(
+            "salesnova_read_notifications",
+            JSON.stringify(
+                readNotifications
+            )
+        );
+
+
+        /* =================================================
+           FIND UNREAD
+        ================================================= */
+
+        const unreadProducts =
+            products.filter(
+                function (product) {
+
+                    const notificationId =
+                        String(product.id) +
+                        "_" +
+                        String(product.stock);
+
+
+                    return !readNotifications.includes(
+                        notificationId
+                    );
+
+                }
+            );
+
+
+        notificationCount.innerText =
+            unreadProducts.length;
+
+
+        notificationList.innerHTML = "";
+
+
+        /* =================================================
+           CREATE NOTIFICATIONS
+        ================================================= */
+
+        products.forEach(
+            function (product) {
+
+                const stock =
+                    Number(
+                        product.stock
+                    );
+
+
+                const notificationId =
+                    String(product.id) +
+                    "_" +
+                    String(product.stock);
+
+
+                const isRead =
+                    readNotifications.includes(
+                        notificationId
+                    );
+
+
+                const productName =
+                    escapeActivityText(
+                        product.product_name ||
+                        "Product"
+                    );
+
+
+                let notification;
+
+
+                /* OUT OF STOCK */
+
+                if (stock <= 0) {
+
+                    notification = `
+
+                        <div
+                            class="notification-item out-stock ${isRead ? "read" : ""}"
+                            data-notification-id="${notificationId}"
+                        >
+
+                            <i
+                                class="fa-solid fa-circle-exclamation"
+                            ></i>
+
+                            <div>
+
+                                <strong>
+                                    ${productName}
+                                </strong>
+
+                                <p>
+                                    Product is out of stock.
+                                    Please restock.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* LOW STOCK */
+
+                else {
+
+                    notification = `
+
+                        <div
+                            class="notification-item low-stock ${isRead ? "read" : ""}"
+                            data-notification-id="${notificationId}"
+                        >
+
+                            <i
+                                class="fa-solid fa-triangle-exclamation"
+                            ></i>
+
+                            <div>
+
+                                <strong>
+                                    ${productName}
+                                </strong>
+
+                                <p>
+                                    Only ${stock}
+                                    unit${stock === 1 ? "" : "s"}
+                                    left.
+                                    Consider restocking.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                notificationList.innerHTML +=
+                    notification;
+
+            }
+        );
+
+
+        /* =================================================
+           NOTIFICATION CLICK
+        ================================================= */
+
+        const notificationItems =
+            document.querySelectorAll(
+                ".notification-item"
+            );
+
+
+        notificationItems.forEach(
+            function (item) {
+
+                item.addEventListener(
+                    "click",
+                    function () {
+
+                        const id =
+                            item.dataset.notificationId;
+
+
+                        let readNotifications =
+                            JSON.parse(
+                                localStorage.getItem(
+                                    "salesnova_read_notifications"
+                                )
+                            ) || [];
+
+
+                        if (
+                            !readNotifications.includes(
+                                id
+                            )
+                        ) {
+
+                            readNotifications.push(
+                                id
+                            );
+
+                        }
+
+
+                        localStorage.setItem(
+                            "salesnova_read_notifications",
+                            JSON.stringify(
+                                readNotifications
+                            )
+                        );
+
+
+                        item.classList.add(
+                            "read"
+                        );
+
+
+                        updateNotificationCount();
+
+                    }
+                );
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Notification error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   UPDATE NOTIFICATION COUNT
+========================================================= */
+
+function updateNotificationCount() {
+
+    const notificationItems =
+        document.querySelectorAll(
+            ".notification-item"
+        );
+
+
+    let unreadCount = 0;
+
+
+    notificationItems.forEach(
+        function (item) {
+
+            if (
+                !item.classList.contains(
+                    "read"
+                )
+            ) {
+
+                unreadCount++;
+
+            }
+
+        }
+    );
+
+
+    const notificationCount =
+        document.getElementById(
+            "notificationCount"
+        );
+
+
+    if (notificationCount) {
+
+        notificationCount.innerText =
+            unreadCount;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   MARK ALL NOTIFICATIONS AS READ
+========================================================= */
+
+const markAllReadBtn =
+    document.getElementById(
+        "markAllReadBtn"
+    );
+
+
+if (markAllReadBtn) {
+
+    markAllReadBtn.addEventListener(
+        "click",
+        function () {
+
+            const notificationItems =
+                document.querySelectorAll(
+                    ".notification-item"
+                );
+
+
+            let readNotifications =
+                JSON.parse(
+                    localStorage.getItem(
+                        "salesnova_read_notifications"
+                    )
+                ) || [];
+
+
+            notificationItems.forEach(
+                function (item) {
+
+                    const id =
+                        item.dataset.notificationId;
+
+
+                    if (
+                        id &&
+                        !readNotifications.includes(
+                            id
+                        )
+                    ) {
+
+                        readNotifications.push(
+                            id
+                        );
+
+                    }
+
+
+                    item.classList.add(
+                        "read"
+                    );
+
+                }
+            );
+
+
+            localStorage.setItem(
+                "salesnova_read_notifications",
+                JSON.stringify(
+                    readNotifications
+                )
+            );
+
+
+            const notificationCount =
+                document.getElementById(
+                    "notificationCount"
+                );
+
+
+            if (notificationCount) {
+
+                notificationCount.innerText =
+                    "0";
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   NOTIFICATION PANEL
+========================================================= */
+
+const notificationBtn =
+    document.getElementById(
+        "notificationBtn"
+    );
+
+
+const notificationPanel =
+    document.getElementById(
+        "notificationPanel"
+    );
+
+
+if (notificationBtn) {
+
+    notificationBtn.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+
+            if (notificationPanel) {
+
+                notificationPanel.classList.toggle(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+if (notificationPanel) {
+
+    notificationPanel.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+}
+
+
+document.addEventListener(
+    "click",
+    function () {
+
+        if (notificationPanel) {
+
+            notificationPanel.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   ESCAPE TEXT
+========================================================= */
+
+function escapeActivityText(text) {
+
+    return String(
+        text || ""
+    )
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout() {
+
+    try {
+
+        await fetch(
+            "http://127.0.0.1:5000/logout",
+            {
+                credentials: "include"
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Logout error:",
+            error
+        );
+
+    }
+
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+
+/* =========================================================
+   SALES CHART
+========================================================= */
+
+let salesChart = null;
+
+
+async function loadSalesChart() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/sales_chart_data",
+            {
+                credentials: "include"
+            }
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load sales chart"
+            );
+
+        }
+
+
+        const chartData =
+            await response.json();
+
+
+        if (chartData.error) {
+
+            return;
+
+        }
+
+
+        const canvas =
+            document.getElementById(
+                "salesChart"
+            );
+
+
+        if (!canvas) {
+
+            return;
+
+        }
+
+
+        const ctx =
+            canvas.getContext(
+                "2d"
+            );
+
+
+        if (salesChart) {
+
+            salesChart.destroy();
+
+        }
+
+
+        salesChart =
+            new Chart(
+                ctx,
+                {
+
+                    type: "line",
+
+                    data: {
+
+                        labels:
+                            chartData.labels ||
+                            [],
+
+                        datasets: [
+
+                            {
+
+                                label:
+                                    "Daily Sales (₦)",
+
+                                data:
+                                    chartData.values ||
+                                    [],
+
+                                borderWidth:
+                                    3,
+
+                                tension:
+                                    0.4,
+
+                                fill:
+                                    false
+
+                            }
+
+                        ]
+
+                    },
+
+                    options: {
+
+                        responsive:
+                            true,
+
+                        maintainAspectRatio:
+                            false,
+
+                        plugins: {
+
+                            legend: {
+
+                                display:
+                                    true
+
+                            }
+
+                        },
+
+                        scales: {
+
+                            y: {
+
+                                beginAtZero:
+                                    true
+
+                            }
+
+                        }
+
+                    }
+
+                }
+            );
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Chart error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+const menuToggle =
+    document.getElementById(
+        "menuToggle"
+    );
+
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+
+const overlay =
+    document.getElementById(
+        "sidebarOverlay"
+    );
+
+
+if (menuToggle) {
+
+    menuToggle.addEventListener(
+        "click",
+        function () {
+
+            if (sidebar) {
+
+                sidebar.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            if (overlay) {
+
+                overlay.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+if (overlay) {
+
+    overlay.addEventListener(
+        "click",
+        function () {
+
+            if (sidebar) {
+
+                sidebar.classList.remove(
+                    "active"
+                );
+
+            }
+
+
+            overlay.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   LOGOUT BUTTON
+========================================================= */
+
+const logoutBtn =
+    document.getElementById(
+        "logoutBtn"
+    );
+
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            logout();
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   START DASHBOARD
+========================================================= */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadUser();
+
+        loadDashboardStats();
+
+        loadSalesChart();
+
+        loadPrediction();
+
+        loadNotifications();
+
+    }
+);
+
+
+
+/* =========================================================
+   REFRESH DASHBOARD DATA
+   EVERY 60 SECONDS
+========================================================= */
+
+setInterval(
+    function () {
+
+        loadDashboardStats();
+
+        loadPrediction();
+
+        loadNotifications();
+
+        loadSalesChart();
+
+    },
+    60000
+);
+
+</script>
+
+
+
+<script src="theme.js"></script>
+
+</body>
+
+</html>

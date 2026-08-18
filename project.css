@@ -1,0 +1,619 @@
+/* =========================================================
+   LOGIN + CREATE ACCOUNT
+   SHARED AUTHENTICATION CSS
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* =========================================================
+   AUTH PAGE
+========================================================= */
+
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b,
+        #0ea5e9
+    );
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   AUTH CONTAINER
+========================================================= */
+
+.auth-container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+}
+
+
+/* =========================================================
+   AUTH CARD
+========================================================= */
+
+.auth-card {
+    width: 100%;
+    max-width: 500px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-radius: 25px;
+
+    padding: 40px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.30);
+
+    animation: fadeUp 0.8s ease;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.auth-logo {
+    font-size: 34px;
+    font-weight: 700;
+
+    color: #38bdf8;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.auth-card h1 {
+    color: #ffffff;
+
+    text-align: center;
+
+    margin-bottom: 10px;
+
+    font-size: 30px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.auth-card > p {
+    text-align: center;
+
+    color: #cbd5e1;
+
+    margin-bottom: 30px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.auth-message {
+    width: 100%;
+
+    margin-top: 15px;
+    margin-bottom: 18px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    display: none;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+/* SUCCESS MESSAGE */
+
+.auth-message.success-message {
+    display: block;
+
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+
+/* ERROR MESSAGE */
+
+.auth-message.error-message {
+    display: block;
+
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group {
+    position: relative;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ffffff;
+
+    font-weight: 500;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.form-group input {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid transparent;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    color: #ffffff;
+
+    outline: none;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+
+/* INPUT PLACEHOLDER */
+
+.form-group input::placeholder {
+    color: #cbd5e1;
+}
+
+
+/* INPUT FOCUS */
+
+.form-group input:focus {
+    border-color: #38bdf8;
+
+    box-shadow:
+        0 0 12px rgba(56, 189, 248, 0.35);
+}
+
+
+/* =========================================================
+   PASSWORD WRAPPER
+========================================================= */
+
+.password-wrapper {
+    position: relative;
+
+    width: 100%;
+}
+
+
+/* Password input needs space for eye */
+
+.password-wrapper input {
+    padding-right: 55px;
+}
+
+
+/* =========================================================
+   PASSWORD EYE
+========================================================= */
+
+.toggle-password {
+    position: absolute;
+
+    right: 18px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    color: #cbd5e1;
+
+    font-size: 18px;
+
+    transition: 0.3s;
+
+    user-select: none;
+}
+
+
+.toggle-password:hover {
+    color: #38bdf8;
+}
+
+
+/* =========================================================
+   FORGOT PASSWORD
+========================================================= */
+
+.forgot-password {
+    text-align: right;
+
+    margin-top: -8px;
+
+    margin-bottom: 18px;
+}
+
+
+.forgot-password a {
+    color: #38bdf8;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+
+.forgot-password a:hover {
+    text-decoration: underline;
+
+    color: #7dd3fc;
+}
+
+
+/* =========================================================
+   AUTH BUTTON
+========================================================= */
+
+.auth-btn {
+    width: 100%;
+
+    min-height: 50px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #38bdf8;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.auth-btn:hover {
+    background: #0284c7;
+
+    transform: translateY(-1px);
+}
+
+
+.auth-btn:active {
+    transform: translateY(0);
+}
+
+
+.auth-btn:disabled {
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   LOADING SPINNER
+========================================================= */
+
+.spinner {
+    width: 18px;
+    height: 18px;
+
+    border: 3px solid rgba(255, 255, 255, 0.3);
+
+    border-top: 3px solid #ffffff;
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+
+    display: none;
+}
+
+
+@keyframes spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   PASSWORD STRENGTH
+========================================================= */
+
+.password-strength {
+    width: 100%;
+
+    height: 6px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border-radius: 10px;
+
+    margin-top: 10px;
+
+    overflow: hidden;
+}
+
+
+.password-strength span {
+    display: block;
+
+    height: 100%;
+
+    width: 0%;
+
+    border-radius: 10px;
+
+    transition: 0.4s;
+}
+
+
+/* WEAK */
+
+.password-strength .weak {
+    width: 33%;
+
+    background: #ef4444;
+}
+
+
+/* MEDIUM */
+
+.password-strength .medium {
+    width: 66%;
+
+    background: #f59e0b;
+}
+
+
+/* STRONG */
+
+.password-strength .strong {
+    width: 100%;
+
+    background: #22c55e;
+}
+
+
+/* =========================================================
+   PASSWORD STRENGTH TEXT
+========================================================= */
+
+.password-text {
+    margin-top: 8px;
+
+    font-size: 13px;
+
+    color: #e2e8f0;
+}
+
+
+/* =========================================================
+   LOGIN / SIGNUP LINK
+========================================================= */
+
+.auth-link {
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+}
+
+
+.auth-link a {
+    color: #38bdf8;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+.auth-link a:hover {
+    color: #7dd3fc;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   CARD ANIMATION
+========================================================= */
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .auth-container {
+        padding: 20px;
+    }
+
+
+    .auth-card {
+        max-width: 480px;
+
+        padding: 35px 30px;
+
+        border-radius: 22px;
+    }
+
+
+    .auth-logo {
+        font-size: 32px;
+    }
+
+
+    .auth-card h1 {
+        font-size: 27px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .auth-container {
+        padding: 15px;
+    }
+
+
+    .auth-card {
+        padding: 30px 20px;
+
+        border-radius: 20px;
+    }
+
+
+    .auth-logo {
+        font-size: 29px;
+    }
+
+
+    .auth-card h1 {
+        font-size: 24px;
+    }
+
+
+    .auth-card > p {
+        font-size: 14px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .form-group input {
+        padding: 13px;
+
+        font-size: 14px;
+    }
+
+
+    .auth-btn {
+        padding: 14px;
+
+        font-size: 15px;
+    }
+
+
+    .auth-link {
+        font-size: 13px;
+    }
+
+}

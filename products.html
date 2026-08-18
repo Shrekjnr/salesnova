@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products - SalesAI</title>
+
+    <!-- =====================================================
+         SHARED THEME
+    ====================================================== -->
+
+    <script>
+        (function () {
+
+            const savedTheme =
+                localStorage.getItem("settingsTheme") || "dark";
+
+            document.documentElement.setAttribute(
+                "data-theme",
+                savedTheme
+            );
+
+        })();
+    </script>
+
+
+    <!-- PRODUCT CSS -->
+
+    <link rel="stylesheet" href="/product.css">
+
+
+    <!-- POPPINS -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- SIDEBAR HEADER -->
+
+        <div class="sidebar-header">
+
+            <div class="sidebar-logo">
+
+                <div class="store-icon">
+
+                    <i class="fa-solid fa-store"></i>
+
+                </div>
+
+                <span
+                    class="logo-text"
+                    id="businessName"
+                >
+                    Business
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SIDEBAR NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <a
+                href="dashboard.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span class="nav-text">
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="sales.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span class="nav-text">
+                    Sales Entry
+                </span>
+
+            </a>
+
+
+            <a
+                href="products.html"
+                class="nav-item active"
+            >
+
+                <i class="fa-solid fa-boxes-stacked"></i>
+
+                <span class="nav-text">
+                    Products
+                </span>
+
+            </a>
+
+
+            <a
+                href="prediction.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                <span class="nav-text">
+                    Prediction
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="nav-item"
+            >
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span class="nav-text">
+                    Settings
+                </span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="nav-item logout"
+                onclick="logout(); return false;"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span class="nav-text">
+                    Logout
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- SIDEBAR PROFILE -->
+
+        <div class="sidebar-profile">
+
+            <img
+                id="topProfileImage"
+                src="/static/images/default-profile.png"
+                alt="Profile"
+            >
+
+            <div class="sidebar-profile-info">
+
+                <strong id="sidebarOwnerName">
+                    Business Owner
+                </strong>
+
+                <small>
+                    Administrator
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <div class="topbar">
+
+
+            <div class="topbar-left">
+
+
+                <!-- MOBILE MENU -->
+
+                <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    type="button"
+                    aria-label="Open menu"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div>
+
+                    <h1>
+                        Product Management
+                    </h1>
+
+                    <p>
+                        Manage your business inventory.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PROFILE -->
+
+            <div class="profile">
+
+                Administrator
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             ADD PRODUCT CARD
+        ================================================== -->
+
+        <div class="activity">
+
+
+            <h2>
+
+                <i class="fa-solid fa-box-open"></i>
+
+                Add New Product
+
+            </h2>
+
+
+            <form id="productForm">
+
+
+                <!-- PRODUCT NAME -->
+
+                <label for="product">
+                    Product Name
+                </label>
+
+
+                <input
+                    type="text"
+                    id="product"
+                    placeholder="Enter product name"
+                    autocomplete="off"
+                    required
+                >
+
+
+                <!-- QUANTITY -->
+
+                <label for="quantity">
+                    Quantity
+                </label>
+
+
+                <input
+                    type="number"
+                    id="quantity"
+                    placeholder="Available quantity"
+                    min="1"
+                    step="1"
+                    required
+                >
+
+
+                <!-- PRICE -->
+
+                <label for="price">
+                    Selling Price (₦)
+                </label>
+
+
+                <input
+                    type="number"
+                    id="price"
+                    placeholder="Enter selling price"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    id="addProductBtn"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Product
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCT INVENTORY
+        ================================================== -->
+
+        <div class="activity">
+
+
+            <h2>
+
+                <i class="fa-solid fa-boxes-stacked"></i>
+
+                Product Inventory
+
+            </h2>
+
+
+            <p class="inventory-description">
+
+                View and manage products currently available in your business.
+
+            </p>
+
+
+            <!-- TABLE WRAPPER -->
+
+            <div class="product-table-wrapper">
+
+
+                <table id="productTableData">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Quantity
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="productTable">
+
+                        <!-- PRODUCTS LOADED BY JAVASCRIPT -->
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     TOP NOTIFICATION
+========================================================= -->
+
+<div
+    id="message"
+    class="notification"
+    role="alert"
+    aria-live="polite"
+>
+
+    <div class="notification-icon">
+
+        <i
+            id="messageIcon"
+            class="fa-solid"
+        ></i>
+
+    </div>
+
+    <span id="messageText"></span>
+
+</div>
+
+
+
+<!-- =========================================================
+     MOBILE SIDEBAR OVERLAY
+========================================================= -->
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+>
+</div>
+
+
+
+<!-- =========================================================
+     DELETE CONFIRMATION MODAL
+========================================================= -->
+
+<div
+    id="deleteModal"
+    class="delete-modal"
+>
+
+
+    <div class="delete-modal-content">
+
+
+        <!-- ICON -->
+
+        <div class="delete-modal-icon">
+
+            <i class="fa-solid fa-trash"></i>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h3>
+            Delete Product?
+        </h3>
+
+
+        <!-- MESSAGE -->
+
+        <p id="deleteModalText">
+
+            Are you sure you want to delete this product?
+
+        </p>
+
+
+        <!-- BUTTONS -->
+
+        <div class="delete-modal-buttons">
+
+
+            <button
+                type="button"
+                id="cancelDeleteBtn"
+                class="cancel-delete-btn"
+            >
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                id="confirmDeleteBtn"
+                class="confirm-delete-btn"
+            >
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   PRODUCT PAGE JAVASCRIPT
+========================================================= */
+
+let productToDelete = null;
+
+
+/* =========================================================
+   LOAD USER
+========================================================= */
+
+async function loadUser() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/user",
+            {
+                credentials: "include"
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to load user");
+        }
+
+        const user = await response.json();
+
+        if (user.error) {
+
+            window.location.href = "login.html";
+            return;
+
+        }
+
+
+        /* BUSINESS NAME */
+
+        const businessName =
+            document.getElementById("businessName");
+
+        if (businessName) {
+
+            businessName.textContent =
+                user.business || "Business";
+
+        }
+
+
+        /* OWNER NAME */
+
+        const ownerName =
+            document.getElementById("sidebarOwnerName");
+
+        if (ownerName) {
+
+            ownerName.textContent =
+                user.fullname || "Business Owner";
+
+        }
+
+
+        /* PROFILE IMAGE */
+
+        const profileImage =
+            document.getElementById("topProfileImage");
+
+        if (
+            profileImage &&
+            user.profile_image
+        ) {
+
+            profileImage.src =
+                user.profile_image;
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "User loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout() {
+
+    try {
+
+        await fetch(
+            "http://127.0.0.1:5000/logout",
+            {
+                credentials: "include"
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Logout error:",
+            error
+        );
+
+    }
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =========================================================
+   TOP RIGHT ALERT
+========================================================= */
+
+let messageTimer = null;
+
+
+function showMessage(messageText, type = "success") {
+
+    /* Remove existing alert */
+
+    const oldMessage =
+        document.getElementById("productAlert");
+
+    if (oldMessage) {
+
+        oldMessage.remove();
+
+    }
+
+
+    /* Clear previous timer */
+
+    if (messageTimer) {
+
+        clearTimeout(messageTimer);
+
+    }
+
+
+    /* Create alert */
+
+    const alert =
+        document.createElement("div");
+
+    alert.id =
+        "productAlert";
+
+
+    /* Alert type */
+
+    if (type === "success") {
+
+        alert.className =
+            "product-alert success-alert";
+
+        alert.innerHTML = `
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <span>${messageText}</span>
+
+            <button
+                type="button"
+                class="alert-close"
+                aria-label="Close"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        `;
+
+    }
+
+    else {
+
+        alert.className =
+            "product-alert error-alert";
+
+        alert.innerHTML = `
+
+            <i class="fa-solid fa-circle-exclamation"></i>
+
+            <span>${messageText}</span>
+
+            <button
+                type="button"
+                class="alert-close"
+                aria-label="Close"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        `;
+
+    }
+
+
+    /* Add to page */
+
+    document.body.appendChild(alert);
+
+
+    /* Close button */
+
+    const closeButton =
+        alert.querySelector(".alert-close");
+
+    if (closeButton) {
+
+        closeButton.addEventListener(
+            "click",
+            function () {
+
+                alert.classList.remove("show");
+
+                setTimeout(function () {
+
+                    if (alert) {
+                        alert.remove();
+                    }
+
+                }, 300);
+
+            }
+        );
+
+    }
+
+
+    /* Force browser to render first */
+
+    requestAnimationFrame(function () {
+
+        alert.classList.add("show");
+
+    });
+
+
+    /* Automatically disappear after 5 seconds */
+
+    messageTimer =
+        setTimeout(function () {
+
+            if (!alert) {
+                return;
+            }
+
+            alert.classList.remove("show");
+
+
+            setTimeout(function () {
+
+                if (alert) {
+                    alert.remove();
+                }
+
+            }, 300);
+
+        }, 5000);
+
+}
+
+
+/* =========================================================
+   LOAD PRODUCTS
+========================================================= */
+
+async function loadProducts() {
+
+    const table =
+        document.getElementById(
+            "productTable"
+        );
+
+
+    if (!table) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:5000/products",
+                {
+                    credentials: "include"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load products"
+            );
+
+        }
+
+
+        const products =
+            await response.json();
+
+
+        table.innerHTML = "";
+
+
+        /* NO PRODUCTS */
+
+        if (
+            !Array.isArray(products) ||
+            products.length === 0
+        ) {
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        class="empty-state"
+                    >
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                        <strong>
+                            No products available
+                        </strong>
+
+                        <span>
+                            Add your first product above.
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* DISPLAY PRODUCTS */
+
+        products.forEach(function(product) {
+
+            const stock =
+                Number(product.stock) || 0;
+
+
+            let status;
+            let statusClass;
+
+
+            if (stock > 0) {
+
+                status =
+                    "In Stock";
+
+                statusClass =
+                    "in-stock";
+
+            }
+
+            else {
+
+                status =
+                    "Out of Stock";
+
+                statusClass =
+                    "out-stock";
+
+            }
+
+
+            /* Escape product name */
+
+            const productName =
+                String(
+                    product.product_name || ""
+                )
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+
+            table.innerHTML += `
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-name">
+
+                            <span class="product-table-icon">
+
+                                <i class="fa-solid fa-box"></i>
+
+                            </span>
+
+                            ${productName}
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="quantity-badge">
+
+                            ${stock}
+
+                        </span>
+
+                    </td>
+
+
+                    <td class="price-cell">
+
+                        ₦${Number(
+                            product.price || 0
+                        ).toLocaleString()}
+
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="stock ${statusClass}"
+                        >
+
+                            ${status}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="delete-btn"
+                            type="button"
+                            onclick="deleteProduct(
+                                ${Number(product.id)},
+                                '${String(
+                                    product.product_name || ""
+                                )
+                                .replace(/\\/g, "\\\\")
+                                .replace(/'/g, "\\'")}'
+                            "
+                        >
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            <span>
+                                Delete
+                            </span>
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Product loading error:",
+            error
+        );
+
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="table-error"
+                >
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    Unable to load products.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT
+========================================================= */
+
+const productForm =
+    document.getElementById(
+        "productForm"
+    );
+
+
+if (productForm) {
+
+    productForm.addEventListener(
+        "submit",
+        async function(e) {
+
+            e.preventDefault();
+
+
+            const product =
+                document.getElementById(
+                    "product"
+                ).value.trim();
+
+
+            const quantity =
+                document.getElementById(
+                    "quantity"
+                ).value;
+
+
+            const price =
+                document.getElementById(
+                    "price"
+                ).value;
+
+
+            /* VALIDATION */
+
+            if (!product) {
+
+                showMessage(
+                    "Please enter a product name.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                quantity === "" ||
+                Number(quantity) <= 0
+            ) {
+
+                showMessage(
+                    "Please enter a valid quantity.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                price === "" ||
+                Number(price) < 0
+            ) {
+
+                showMessage(
+                    "Please enter a valid price.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const submitButton =
+                document.getElementById(
+                    "addProductBtn"
+                );
+
+
+            const originalText =
+                submitButton.innerHTML;
+
+
+            submitButton.disabled =
+                true;
+
+
+            submitButton.innerHTML = `
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                Adding...
+
+            `;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:5000/add_product",
+                        {
+
+                            method: "POST",
+
+                            credentials: "include",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    product_name:
+                                        product,
+
+                                    quantity:
+                                        Number(quantity),
+
+                                    price:
+                                        Number(price)
+
+                                })
+
+                        }
+                    );
+
+
+                let result = {};
+
+
+                try {
+
+                    result =
+                        await response.json();
+
+                }
+
+                catch (jsonError) {
+
+                    console.error(
+                        "Invalid server response:",
+                        jsonError
+                    );
+
+                }
+
+
+                if (response.ok) {
+
+                    /* RESET FORM */
+
+                    productForm.reset();
+
+
+                    /* RELOAD PRODUCTS */
+
+                    await loadProducts();
+
+
+                    /* SHOW SUCCESS ALERT */
+
+                    showMessage(
+                        result.message ||
+                        "Product added successfully.",
+                        "success"
+                    );
+
+                }
+
+                else {
+
+                    showMessage(
+                        result.error ||
+                        "Unable to add product.",
+                        "error"
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Add product error:",
+                    error
+                );
+
+
+                showMessage(
+                    "Unable to connect to the server.",
+                    "error"
+                );
+
+            }
+
+            finally {
+
+                submitButton.disabled =
+                    false;
+
+
+                submitButton.innerHTML =
+                    originalText;
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   OPEN DELETE MODAL
+========================================================= */
+
+function deleteProduct(
+    id,
+    productName
+) {
+
+    productToDelete =
+        id;
+
+
+    const modal =
+        document.getElementById(
+            "deleteModal"
+        );
+
+
+    const modalText =
+        document.getElementById(
+            "deleteModalText"
+        );
+
+
+    if (modalText) {
+
+        modalText.textContent =
+            `Are you sure you want to delete "${productName}"?`;
+
+    }
+
+
+    if (modal) {
+
+        modal.classList.add(
+            "show"
+        );
+
+    }
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE DELETE MODAL
+========================================================= */
+
+function closeDeleteModal() {
+
+    const modal =
+        document.getElementById(
+            "deleteModal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    productToDelete =
+        null;
+
+}
+
+
+/* =========================================================
+   CANCEL DELETE
+========================================================= */
+
+const cancelDeleteBtn =
+    document.getElementById(
+        "cancelDeleteBtn"
+    );
+
+
+if (cancelDeleteBtn) {
+
+    cancelDeleteBtn.addEventListener(
+        "click",
+        function() {
+
+            closeDeleteModal();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CONFIRM DELETE
+========================================================= */
+
+const confirmDeleteBtn =
+    document.getElementById(
+        "confirmDeleteBtn"
+    );
+
+
+if (confirmDeleteBtn) {
+
+    confirmDeleteBtn.addEventListener(
+        "click",
+        async function() {
+
+            if (
+                productToDelete === null
+            ) {
+
+                return;
+
+            }
+
+
+            const id =
+                productToDelete;
+
+
+            confirmDeleteBtn.disabled =
+                true;
+
+
+            confirmDeleteBtn.innerHTML = `
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                Deleting...
+
+            `;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:5000/delete_product/" +
+                        id,
+                        {
+
+                            method: "DELETE",
+
+                            credentials: "include"
+
+                        }
+                    );
+
+
+                let result = {};
+
+
+                try {
+
+                    result =
+                        await response.json();
+
+                }
+
+                catch (jsonError) {
+
+                    console.error(
+                        "Delete response error:",
+                        jsonError
+                    );
+
+                }
+
+
+                if (!response.ok) {
+
+                    closeDeleteModal();
+
+
+                    showMessage(
+                        result.error ||
+                        "Unable to delete product.",
+                        "error"
+                    );
+
+
+                    return;
+
+                }
+
+
+                /* CLOSE MODAL */
+
+                closeDeleteModal();
+
+
+                /* RELOAD TABLE */
+
+                await loadProducts();
+
+
+                /* SHOW SUCCESS ALERT */
+
+                showMessage(
+                    result.message ||
+                    "Product deleted successfully.",
+                    "success"
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Delete product error:",
+                    error
+                );
+
+
+                closeDeleteModal();
+
+
+                showMessage(
+                    "Unable to connect to the server.",
+                    "error"
+                );
+
+            }
+
+            finally {
+
+                confirmDeleteBtn.disabled =
+                    false;
+
+
+                confirmDeleteBtn.innerHTML = `
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    Delete
+
+                `;
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+========================================================= */
+
+const deleteModal =
+    document.getElementById(
+        "deleteModal"
+    );
+
+
+if (deleteModal) {
+
+    deleteModal.addEventListener(
+        "click",
+        function(e) {
+
+            if (
+                e.target === this
+            ) {
+
+                closeDeleteModal();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(e) {
+
+        if (
+            e.key === "Escape" &&
+            productToDelete !== null
+        ) {
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+const menuToggle =
+    document.getElementById(
+        "menuToggle"
+    );
+
+
+const sidebar =
+    document.querySelector(
+        ".sidebar"
+    );
+
+
+const sidebarOverlay =
+    document.getElementById(
+        "sidebarOverlay"
+    );
+
+
+if (menuToggle) {
+
+    menuToggle.addEventListener(
+        "click",
+        function() {
+
+            sidebar.classList.toggle(
+                "mobile-open"
+            );
+
+
+            sidebarOverlay.classList.toggle(
+                "show"
+            );
+
+        }
+    );
+
+}
+
+
+if (sidebarOverlay) {
+
+    sidebarOverlay.addEventListener(
+        "click",
+        function() {
+
+            sidebar.classList.remove(
+                "mobile-open"
+            );
+
+
+            sidebarOverlay.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE SIDEBAR ON NAVIGATION
+========================================================= */
+
+document
+    .querySelectorAll(".nav-item")
+    .forEach(function(item) {
+
+        item.addEventListener(
+            "click",
+            function() {
+
+                if (
+                    window.innerWidth <= 768
+                ) {
+
+                    sidebar.classList.remove(
+                        "mobile-open"
+                    );
+
+
+                    sidebarOverlay.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   START PAGE
+========================================================= */
+
+window.addEventListener(
+    "load",
+    async function() {
+
+        await loadUser();
+
+        await loadProducts();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
