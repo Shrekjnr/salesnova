@@ -385,6 +385,27 @@ def home():
     return send_from_directory(BASE_DIR, "landing_page.html")
 
 
+@app.route("/css/<path:filename>")
+def serve_css(filename):
+    return send_from_directory(
+        os.path.join(BASE_DIR, "css"),
+        filename
+    )
+
+
+@app.route("/webfonts/<path:filename>")
+def serve_webfonts(filename):
+    return send_from_directory(
+        os.path.join(BASE_DIR, "webfonts"),
+        filename
+    )
+
+
+@app.route("/<path:filename>")
+def serve_static_file(filename):
+    return send_from_directory(BASE_DIR, filename)
+
+
 # =========================================================
 # AUTHENTICATION
 # =========================================================
