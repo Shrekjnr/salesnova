@@ -574,7 +574,7 @@ async function loadUser() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/user",
+            "/user",
             {
                 credentials: "include"
             }
@@ -658,7 +658,7 @@ async function logout() {
     try {
 
         await fetch(
-            "http://127.0.0.1:5000/logout",
+            "/logout",
             {
                 credentials: "include"
             }
@@ -856,7 +856,7 @@ async function loadProducts() {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/products",
+                "/products",
                 {
                     credentials: "include"
                 }
@@ -1189,7 +1189,7 @@ if (productForm) {
 
                 const response =
                     await fetch(
-                        "http://127.0.0.1:5000/add_product",
+                        "/add_product",
                         {
 
                             method: "POST",
@@ -1458,7 +1458,7 @@ if (confirmDeleteBtn) {
 
                 const response =
                     await fetch(
-                        "http://127.0.0.1:5000/delete_product/" +
+                        "/delete_product/" +
                         id,
                         {
 

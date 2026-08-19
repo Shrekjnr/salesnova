@@ -664,7 +664,7 @@ if (signupForm) {
 
                 const response =
                     await fetch(
-                        "http://127.0.0.1:5000/register",
+    "/register",
                         {
 
                             method: "POST",
@@ -760,21 +760,9 @@ if (signupForm) {
                     );
 
 
-                    /*
-                     * IMPORTANT:
-                     *
-                     * Your frontend is running on:
-                     *
-                     * http://127.0.0.1:5500
-                     *
-                     * Therefore we use the exact login URL.
-                     *
-                     * No setTimeout.
-                     * No relative-path ambiguity.
-                     */
 
                     window.location.href =
-                        "http://127.0.0.1:5500/login.html";
+                        "/login.html";
 
 
                     return;

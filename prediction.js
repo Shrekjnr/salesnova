@@ -44,7 +44,7 @@ window.addEventListener("storage", function (event) {
 // API BASE URL
 // ======================================================
 
-const API = "http://127.0.0.1:5000";
+const API = "";
 
 
 // ======================================================

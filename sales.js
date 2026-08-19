@@ -224,7 +224,7 @@ async function loadUser() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/user",
+            "/user",
             {
                 credentials: "include"
             }
@@ -325,7 +325,7 @@ async function loadProducts() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/products",
+            "/products",
             {
                 credentials: "include"
             }
@@ -578,7 +578,7 @@ async function loadSales() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/sales",
+            "/sales",
             {
                 credentials: "include"
             }
@@ -924,7 +924,7 @@ salesForm.addEventListener(
 
             const response =
                 await fetch(
-                    "http://127.0.0.1:5000/add_sale",
+                    "/add_sale",
                     {
 
                         method: "POST",
@@ -1170,7 +1170,7 @@ if (confirmDeleteBtn) {
 
                 const response =
                     await fetch(
-                        "http://127.0.0.1:5000/delete_sale/" +
+                        "/delete_sale/" +
                         id,
                         {
 
