@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from datetime import datetime, date
 import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 import re
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -381,12 +382,7 @@ def calculate_prediction(user_id):
 
 @app.route("/")
 def home():
-    return jsonify({
-        "message": "SalesNova Backend Running",
-        "status": "online",
-        "environment": VERCEL_ENV,
-        "database": "PostgreSQL"
-    })
+    return send_from_directory(BASE_DIR, "landing_page.html")
 
 
 # =========================================================
