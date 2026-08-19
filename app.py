@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session, send_from_directory
+﻿from flask import Flask, request, jsonify, session, send_from_directory
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -1317,9 +1317,9 @@ def update_product(product_id):
     return jsonify({
         "message": "Product updated successfully."
     })
-
-    @app.route("/delete_product/<int:product_id>", methods=["DELETE", "POST"])
+@app.route("/delete_product/<int:product_id>", methods=["DELETE", "POST"])
 def delete_product(product_id):
+
     auth = require_login()
     if auth:
         return auth
@@ -1577,95 +1577,166 @@ def delete_sale(sale_id):
     })
 
 
-# =========================================================
-# DASHBOARD STATISTICS
-# =========================================================
+async function loadDashboardStats() {
 
-@app.route("/dashboard_stats")
-def dashboard_stats():
-    auth = require_login()
-    if auth:
-        return auth
+    try {
 
-    conn = get_db()
-    cursor = conn.cursor()
-
-    try:
-        cursor.execute("""
-            SELECT
-                COUNT(*) AS transactions,
-                COALESCE(SUM(total), 0) AS total_sales,
-                COALESCE(SUM(quantity), 0) AS products_sold
-            FROM sales
-            WHERE user_id = %s
-        """, (current_user_id(),))
-        stats = cursor.fetchone()
-
-        cursor.execute("""
-            SELECT
-                COALESCE(SUM(total), 0) AS today_sales,
-                COUNT(*) AS today_transactions,
-                COALESCE(SUM(quantity), 0) AS today_products_sold
-            FROM sales
-            WHERE user_id = %s
-              AND LEFT(sale_date, 10) = %s
-        """, (
-            current_user_id(),
-            date.today().isoformat()
-        ))
-        today = cursor.fetchone()
-
-        cursor.execute("""
-            SELECT
-                product,
-                COALESCE(SUM(quantity), 0) AS quantity_sold
-            FROM sales
-            WHERE user_id = %s
-            GROUP BY product
-            ORDER BY quantity_sold DESC, product ASC
-            LIMIT 1
-        """, (current_user_id(),))
-        best = cursor.fetchone()
-
-        cursor.execute("""
-            SELECT
-                LEFT(sale_date, 10) AS sale_day,
-                COALESCE(SUM(total), 0) AS total
-            FROM sales
-            WHERE user_id = %s
-            GROUP BY LEFT(sale_date, 10)
-            ORDER BY sale_day ASC
-        """, (current_user_id(),))
-        chart_rows = cursor.fetchall()
-
-    finally:
-        cursor.close()
-        conn.close()
-
-    prediction = calculate_prediction(current_user_id())
-
-    return jsonify({
-        "transactions": int(stats["transactions"] or 0),
-        "total_sales": float(stats["total_sales"] or 0),
-        "products_sold": int(stats["products_sold"] or 0),
-        "today_sales": float(today["today_sales"] or 0),
-        "today_transactions": int(today["today_transactions"] or 0),
-        "today_products_sold": int(today["today_products_sold"] or 0),
-        "best_selling_product": (
-            best["product"] if best else None
-        ),
-        "best_selling_quantity": (
-            int(best["quantity_sold"] or 0) if best else 0
-        ),
-        "predicted_next_sale": prediction["tomorrow"],
-        "chart": [
+        const response = await fetch(
+            "/dashboard_stats",
             {
-                "date": row["sale_day"],
-                "total": float(row["total"] or 0)
+                credentials: "include"
             }
-            for row in chart_rows
-        ]
-    })
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to load dashboard statistics");
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+            console.log("Dashboard API error:", data.error);
+            return;
+        }
+
+        /* TOTAL SALES */
+        const totalSales =
+            document.getElementById("totalSales");
+
+        if (totalSales) {
+            totalSales.innerText =
+                "₦" +
+                Number(data.total_sales || 0)
+                    .toLocaleString();
+        }
+
+        /* PRODUCTS SOLD */
+        const productsSold =
+            document.getElementById("productsSold");
+
+        if (productsSold) {
+            productsSold.innerText =
+                Number(data.products_sold || 0)
+                    .toLocaleString();
+        }
+
+        /* TRANSACTIONS */
+        const transactions =
+            document.getElementById("transactions");
+
+        if (transactions) {
+            transactions.innerText =
+                Number(data.transactions || 0)
+                    .toLocaleString();
+        }
+
+        /* BEST SELLER */
+        const bestSeller =
+            document.getElementById("bestSeller");
+
+        if (bestSeller) {
+            bestSeller.innerText =
+                data.best_selling_product ||
+                "None";
+        }
+
+        /* TODAY'S SALES */
+        const todaySales =
+            document.getElementById("todaySales");
+
+        if (todaySales) {
+            todaySales.innerText =
+                "₦" +
+                Number(data.today_sales || 0)
+                    .toLocaleString();
+        }
+
+        /* PERFORMANCE SALES */
+        const performanceSales =
+            document.getElementById("performanceSales");
+
+        if (performanceSales) {
+            performanceSales.innerText =
+                "₦" +
+                Number(data.total_sales || 0)
+                    .toLocaleString();
+        }
+
+        /* PERFORMANCE TRANSACTIONS */
+        const performanceTransactions =
+            document.getElementById(
+                "performanceTransactions"
+            );
+
+        if (performanceTransactions) {
+            performanceTransactions.innerText =
+                Number(data.transactions || 0)
+                    .toLocaleString();
+        }
+
+        /* AVERAGE SALE */
+        const averageSale =
+            document.getElementById("averageSale");
+
+        if (averageSale) {
+
+            const total =
+                Number(data.total_sales || 0);
+
+            const transactionCount =
+                Number(data.transactions || 0);
+
+            const average =
+                transactionCount > 0
+                    ? total / transactionCount
+                    : 0;
+
+            averageSale.innerText =
+                "₦" +
+                average.toLocaleString(
+                    undefined,
+                    {
+                        maximumFractionDigits: 2
+                    }
+                );
+        }
+
+        /* PREDICTED NEXT SALE */
+        const prediction =
+            document.getElementById("prediction");
+
+        if (prediction) {
+            prediction.innerText =
+                "₦" +
+                Number(
+                    data.predicted_next_sale || 0
+                ).toLocaleString();
+        }
+
+        const performancePrediction =
+            document.getElementById(
+                "performancePrediction"
+            );
+
+        if (performancePrediction) {
+            performancePrediction.innerText =
+                "₦" +
+                Number(
+                    data.predicted_next_sale || 0
+                ).toLocaleString();
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Dashboard stats error:",
+            error
+        );
+
+    }
+
+}
 
 
 # =========================================================
@@ -1966,3 +2037,4 @@ if __name__ == "__main__":
         port=port,
         debug=os.environ.get("FLASK_DEBUG", "0") == "1"
     )
+
