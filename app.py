@@ -1318,6 +1318,54 @@ def update_product(product_id):
         "message": "Product updated successfully."
     })
 
+    @app.route("/delete_product/<int:product_id>", methods=["DELETE", "POST"])
+def delete_product(product_id):
+    auth = require_login()
+    if auth:
+        return auth
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            SELECT id
+            FROM products
+            WHERE id = %s
+              AND user_id = %s
+        """, (product_id, current_user_id()))
+
+        product = cursor.fetchone()
+
+        if not product:
+            return jsonify({
+                "error": "Product not found."
+            }), 404
+
+        cursor.execute("""
+            DELETE FROM products
+            WHERE id = %s
+              AND user_id = %s
+        """, (product_id, current_user_id()))
+
+        conn.commit()
+
+        return jsonify({
+            "message": "Product deleted successfully."
+        }), 200
+
+    except Exception as exc:
+        conn.rollback()
+        print("DELETE PRODUCT ERROR:", exc)
+
+        return jsonify({
+            "error": "Unable to delete product."
+        }), 500
+
+    finally:
+        cursor.close()
+        conn.close()
+
 
 # =========================================================
 # SALES
