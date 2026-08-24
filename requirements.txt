@@ -1,8 +1,8 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.py"
-    }
-  ]
-}
+Flask
+flask-cors
+psycopg2-binary
+pandas
+numpy
+scikit-learn
+Werkzeug
+gunicorn
