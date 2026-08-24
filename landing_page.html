@@ -4,146 +4,346 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SalesNova | Smart Sales Prediction System</title>
+    <title>SalesNova | Smart Sales Management & Forecasting</title>
 
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="landing_page.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 </head>
 
 <body>
 
 <!-- ================= NAVBAR ================= -->
 
-<nav class="navbar">
+<header class="navbar">
 
-    <div class="logo">
-        SalesNova
-    </div>
+    <a href="#home" class="brand">
+        <span class="brand-mark">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 17.5 10 12l3.5 3.5L20 8"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+                <path d="M16 8h4v4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg>
+        </span>
 
-    <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+        <span>SalesNova</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
     <div class="nav-actions">
-
-        <a href="login.html" class="login-btn">
-            Login
-        </a>
-
-        <a href="signup.html" class="signup-btn">
-            Get Started
-        </a>
-
+        <a href="login.html" class="login-btn">Login</a>
+        <a href="signup.html" class="signup-btn">Get Started</a>
     </div>
 
-</nav>
+</header>
+
 
 <!-- ================= HERO ================= -->
 
+<main>
+
 <section class="hero" id="home">
 
-    <div class="hero-left">
+    <div class="hero-content">
 
-        <span class="hero-tag">
-            🤖 AI Powered Sales Forecasting
-        </span>
+        <div class="eyebrow">
+            <span class="status-dot"></span>
+            Intelligent sales management
+        </div>
 
         <h1>
-            Grow Your Business With
-            <span>Artificial Intelligence</span>
+            Make smarter decisions
+            <span>with your sales data.</span>
         </h1>
 
-        <p>
-
-            SalesNova helps businesses record sales,
-            monitor revenue, visualize performance,
-            and accurately predict future sales using
-            Artificial Intelligence and Machine Learning.
-
+        <p class="hero-description">
+            SalesNova helps small businesses track sales, manage inventory,
+            understand performance and forecast future revenue from one
+            simple dashboard.
         </p>
 
-        <div class="hero-buttons">
+        <div class="hero-actions">
 
             <a href="signup.html" class="primary-btn">
                 Get Started
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
             </a>
 
             <a href="login.html" class="secondary-btn">
-                Login
+                Sign in
             </a>
 
         </div>
 
-        <div class="hero-stats">
-
-            <div class="mini-card">
-                <h3>📈</h3>
-                <p>Smart Forecasts</p>
-            </div>
-
-            <div class="mini-card">
-                <h3>📊</h3>
-                <p>Live Dashboard</p>
-            </div>
-
-            <div class="mini-card">
-                <h3>⚡</h3>
-                <p>Fast Analytics</p>
-            </div>
-
+        <div class="hero-note">
+            <span class="check-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m5 12 4 4L19 6"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+            </span>
+            Built for simple, data-driven business management
         </div>
 
     </div>
 
-    <div class="hero-right">
 
-        <div class="dashboard-preview">
+    <!-- ================= DASHBOARD MOCKUP ================= -->
 
-            <div class="dashboard-header">
+    <div class="hero-visual">
 
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+
+        <div class="dashboard-window">
+
+            <div class="window-bar">
+
+                <div class="window-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="window-title">
+                    SalesNova Dashboard
+                </div>
+
+                <div class="window-status">
+                    Live
+                </div>
 
             </div>
 
-            <div class="dashboard-body">
+            <div class="dashboard-content">
 
-                <div class="chart"></div>
+                <div class="dashboard-top">
 
-                <div class="cards">
+                    <div>
+                        <span class="dashboard-label">
+                            Business Overview
+                        </span>
 
-                    <div class="dashboard-card">
+                        <h3>
+                            Sales performance
+                        </h3>
+                    </div>
 
-                        <h4>Total Revenue</h4>
-                        <h2>$42,540</h2>
+                    <div class="period">
+                        Last 30 days
+                    </div>
+
+                </div>
+
+
+                <div class="metric-grid">
+
+                    <div class="metric-card">
+
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 19V5M4 19h16"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="1.8"
+                                      stroke-linecap="round"/>
+                                <path d="m7 15 4-4 3 2 5-6"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="1.8"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                        <span>Total Sales</span>
+                        <strong>₦2.45M</strong>
+                        <small class="positive">+12.8%</small>
 
                     </div>
 
-                    <div class="dashboard-card">
 
-                        <h4>Today's Sales</h4>
-                        <h2>245</h2>
+                    <div class="metric-card">
+
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M6 3h12v18H6z"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="1.8"/>
+                                <path d="M9 7h6M9 11h6M9 15h3"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="1.8"
+                                      stroke-linecap="round"/>
+                            </svg>
+                        </div>
+
+                        <span>Transactions</span>
+                        <strong>384</strong>
+                        <small class="positive">+8.4%</small>
 
                     </div>
 
-                    <div class="dashboard-card">
 
-                        <h4>Prediction</h4>
-                        <h2>+18%</h2>
+                    <div class="metric-card">
+
+                        <div class="metric-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 7h16v13H4z"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="1.8"/>
+                                <path d="M8 7V4h8v3"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="1.8"
+                                      stroke-linecap="round"/>
+                            </svg>
+                        </div>
+
+                        <span>Products</span>
+                        <strong>126</strong>
+                        <small>Active inventory</small>
 
                     </div>
 
-                    <div class="dashboard-card">
+                </div>
 
-                        <h4>Products</h4>
-                        <h2>480</h2>
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+                        <div>
+                            <span>Sales trend</span>
+                            <strong>₦486,200</strong>
+                        </div>
+
+                        <span class="chart-period">
+                            30 days
+                        </span>
+                    </div>
+
+                    <div class="chart-area">
+
+                        <div class="chart-grid-line line-one"></div>
+                        <div class="chart-grid-line line-two"></div>
+                        <div class="chart-grid-line line-three"></div>
+
+                        <svg class="sales-chart"
+                             viewBox="0 0 600 180"
+                             preserveAspectRatio="none">
+
+                            <defs>
+                                <linearGradient
+                                    id="chartFill"
+                                    x1="0"
+                                    y1="0"
+                                    x2="0"
+                                    y2="1">
+
+                                    <stop
+                                        offset="0%"
+                                        stop-color="#38bdf8"
+                                        stop-opacity=".25"/>
+
+                                    <stop
+                                        offset="100%"
+                                        stop-color="#38bdf8"
+                                        stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+
+                            <path
+                                d="M0 145
+                                   C35 138 50 120 78 128
+                                   S125 108 150 118
+                                   S190 95 220 105
+                                   S260 78 290 90
+                                   S330 65 360 78
+                                   S405 45 430 62
+                                   S470 38 495 50
+                                   S535 22 560 36
+                                   S590 18 600 20
+                                   L600 180
+                                   L0 180 Z"
+                                fill="url(#chartFill)"
+                            />
+
+                            <path
+                                d="M0 145
+                                   C35 138 50 120 78 128
+                                   S125 108 150 118
+                                   S190 95 220 105
+                                   S260 78 290 90
+                                   S330 65 360 78
+                                   S405 45 430 62
+                                   S470 38 495 50
+                                   S535 22 560 36
+                                   S590 18 600 20"
+                                fill="none"
+                                stroke="#38bdf8"
+                                stroke-width="4"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
 
                     </div>
+
+                </div>
+
+
+                <div class="prediction-strip">
+
+                    <div class="prediction-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3v18M5 8.5C5 6.6 7.2 5 10 5h3c3 0 6 1.5 6 4 0 2.1-1.6 3.4-4.5 4l-5 .9C6.5 14.4 5 15.7 5 18c0 2.4 2.4 3 5 3h3c3 0 6-1.5 6-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="1.7"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+
+                    <div>
+                        <span>Sales forecast</span>
+                        <strong>Positive trend detected</strong>
+                    </div>
+
+                    <span class="forecast-arrow">
+                        →
+                    </span>
 
                 </div>
 
@@ -155,258 +355,554 @@
 
 </section>
 
+
+<!-- ================= TRUST BAR ================= -->
+
+<section class="trust-bar">
+
+    <div class="trust-item">
+        <strong>Sales Tracking</strong>
+        <span>Record and monitor transactions</span>
+    </div>
+
+    <div class="trust-divider"></div>
+
+    <div class="trust-item">
+        <strong>Inventory</strong>
+        <span>Keep stock under control</span>
+    </div>
+
+    <div class="trust-divider"></div>
+
+    <div class="trust-item">
+        <strong>Forecasting</strong>
+        <span>Plan with sales predictions</span>
+    </div>
+
+</section>
+
+
 <!-- ================= FEATURES ================= -->
 
 <section class="features" id="features">
 
-    <div class="section-title">
+    <div class="section-heading">
 
-        <h2>
-            Powerful Features
-        </h2>
-
-        <p>
-
-            Everything your business needs to
-            manage sales and make smarter decisions.
-
-        </p>
-
-    </div>
-
-    <div class="feature-grid">
-
-        <div class="feature-card">
-            <div class="icon">📊</div>
-            <h3>Interactive Dashboard</h3>
-            <p>
-                Monitor sales performance with beautiful charts and real-time insights.
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <div class="icon">🤖</div>
-            <h3>AI Prediction</h3>
-            <p>
-                Predict future sales using Machine Learning algorithms.
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <div class="icon">📦</div>
-            <h3>Inventory Tracking</h3>
-            <p>
-                Manage products and monitor stock movement efficiently.
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <div class="icon">📈</div>
-            <h3>Revenue Reports</h3>
-            <p>
-                Generate detailed sales reports for better business decisions.
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <div class="icon">🔒</div>
-            <h3>Secure Accounts</h3>
-            <p>
-                Keep business information protected with secure authentication.
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <div class="icon">⚡</div>
-            <h3>Fast Performance</h3>
-            <p>
-                Experience a smooth and responsive system built for speed.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ================= WHY CHOOSE US ================= -->
-
-<section class="why-us" id="about">
-
-    <div class="why-left">
-
-        <span class="section-tag">
-            WHY CHOOSE SALESNOVA
+        <span class="section-label">
+            FEATURES
         </span>
 
         <h2>
-            Smarter Sales Management For Every Business
+            Everything you need to understand your business.
         </h2>
 
         <p>
-
-            SalesNova combines Artificial Intelligence,
-            data visualization and sales management into one
-            powerful platform. Whether you're a small business
-            owner or an expanding company, SalesNova helps you
-            make data-driven decisions with confidence.
-
+            SalesNova brings sales management, inventory monitoring,
+            analytics and forecasting together in one platform.
         </p>
 
-        <div class="benefits">
+    </div>
 
-            <div class="benefit">
-                ✅ Easy to use interface
+
+    <div class="feature-grid">
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 19V5M4 19h16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"/>
+                    <path d="m7 15 4-4 3 2 5-6"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
             </div>
 
-            <div class="benefit">
-                ✅ AI-powered sales forecasting
+            <h3>Sales Dashboard</h3>
+
+            <p>
+                View important sales metrics, revenue trends and
+                business performance from a centralized dashboard.
+            </p>
+
+            <span class="feature-link">
+                Explore analytics
+                <span>→</span>
+            </span>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 7h16v13H4z"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"/>
+                    <path d="M8 7V4h8v3M8 12h8M8 16h5"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"/>
+                </svg>
             </div>
 
-            <div class="benefit">
-                ✅ Beautiful visual dashboard
+            <h3>Inventory Management</h3>
+
+            <p>
+                Manage products, monitor stock levels and quickly
+                identify low-stock or unavailable products.
+            </p>
+
+            <span class="feature-link">
+                Manage inventory
+                <span>→</span>
+            </span>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 18V9M12 18V5M19 18v-7"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"/>
+                    <path d="M3 21h18"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"/>
+                </svg>
             </div>
 
-            <div class="benefit">
-                ✅ Secure user authentication
+            <h3>Business Analytics</h3>
+
+            <p>
+                Turn recorded sales into useful insights that help
+                you understand how your business is performing.
+            </p>
+
+            <span class="feature-link">
+                Understand performance
+                <span>→</span>
+            </span>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 17 9 12l4 4 7-9"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                    <path d="M16 7h4v4"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
             </div>
 
-            <div class="benefit">
-                ✅ Fast sales recording
+            <h3>Sales Forecasting</h3>
+
+            <p>
+                Use historical sales data to estimate future sales
+                and support better planning and decision-making.
+            </p>
+
+            <span class="feature-link">
+                Forecast sales
+                <span>→</span>
+            </span>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="5" y="3" width="14" height="18" rx="3"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"/>
+                    <path d="M9 11h6M9 15h4"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"/>
+                </svg>
             </div>
 
-            <div class="benefit">
-                ✅ Business performance insights
+            <h3>Sales Records</h3>
+
+            <p>
+                Record transactions efficiently and maintain an
+                organized history of your business sales.
+            </p>
+
+            <span class="feature-link">
+                Record sales
+                <span>→</span>
+            </span>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3 5 6v5c0 4.5 2.8 8 7 10 4.2-2 7-5.5 7-10V6l-7-3Z"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linejoin="round"/>
+                    <path d="m9 12 2 2 4-4"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <h3>Secure Authentication</h3>
+
+            <p>
+                Keep your business information separated with
+                account-based access and secure authentication.
+            </p>
+
+            <span class="feature-link">
+                Secure your account
+                <span>→</span>
+            </span>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <div class="about-visual">
+
+        <div class="about-card main-card">
+
+            <div class="about-card-header">
+                <span>Business intelligence</span>
+
+                <span class="live-badge">
+                    Active
+                </span>
+            </div>
+
+            <div class="about-number">
+                <span>Current performance</span>
+                <strong>Growing</strong>
+            </div>
+
+            <div class="progress-line">
+                <span></span>
+            </div>
+
+            <div class="about-mini-grid">
+
+                <div>
+                    <small>Sales trend</small>
+                    <strong>Positive</strong>
+                </div>
+
+                <div>
+                    <small>Inventory</small>
+                    <strong>Monitored</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="floating-card floating-one">
+
+            <div class="floating-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 19V9M12 19V5M19 19v-7"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <div>
+                <strong>Analytics</strong>
+                <span>Clear business insights</span>
+            </div>
+
+        </div>
+
+
+        <div class="floating-card floating-two">
+
+            <div class="floating-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 17 9 12l4 4 7-9"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div>
+                <strong>Forecast</strong>
+                <span>Plan ahead</span>
             </div>
 
         </div>
 
     </div>
 
-    <div class="why-right">
 
-        <div class="stat-card">
-            <h1>95%</h1>
-            <p>Forecast Accuracy</p>
-        </div>
+    <div class="about-content">
 
-        <div class="stat-card">
-            <h1>24/7</h1>
-            <p>Dashboard Access</p>
-        </div>
+        <span class="section-label">
+            WHY SALESNOVA
+        </span>
 
-        <div class="stat-card">
-            <h1>100%</h1>
-            <p>Secure Login</p>
-        </div>
+        <h2>
+            Turn everyday sales records into useful business decisions.
+        </h2>
 
-        <div class="stat-card">
-            <h1>∞</h1>
-            <p>Sales Records</p>
+        <p>
+            Many small businesses collect sales information without
+            having a simple way to understand it. SalesNova organizes
+            that information and presents it through clear dashboards,
+            inventory insights and sales forecasting.
+        </p>
+
+        <div class="about-points">
+
+            <div class="about-point">
+
+                <span class="point-number">
+                    01
+                </span>
+
+                <div>
+                    <h3>Record</h3>
+                    <p>
+                        Capture your sales and product information
+                        in one centralized system.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="about-point">
+
+                <span class="point-number">
+                    02
+                </span>
+
+                <div>
+                    <h3>Analyze</h3>
+                    <p>
+                        Understand revenue, transactions, inventory
+                        and sales performance.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="about-point">
+
+                <span class="point-number">
+                    03
+                </span>
+
+                <div>
+                    <h3>Predict</h3>
+                    <p>
+                        Use historical sales patterns to support
+                        future business planning.
+                    </p>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
 
 </section>
 
-<!-- ================= CALL TO ACTION ================= -->
+
+<!-- ================= CTA ================= -->
 
 <section class="cta">
 
-    <div class="cta-content">
+    <div class="cta-inner">
+
+        <span class="section-label light">
+            GET STARTED
+        </span>
 
         <h2>
-            Ready To Grow Your Business?
+            Your sales data can do more.
         </h2>
 
         <p>
-
-            Join SalesNova today and discover how Artificial
-            Intelligence can help you increase revenue,
-            understand your sales trends and predict future
-            business performance.
-
+            Start managing your sales, monitoring inventory and
+            exploring future sales trends with SalesNova.
         </p>
 
-        <a href="signup.html" class="primary-btn">
-            Create Free Account
-        </a>
+        <div class="cta-actions">
+
+            <a href="signup.html" class="primary-btn">
+                Create an account
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+            <a href="login.html" class="cta-login">
+                Already have an account?
+                <span>Sign in</span>
+            </a>
+
+        </div>
 
     </div>
 
 </section>
+
+</main>
+
 
 <!-- ================= FOOTER ================= -->
 
 <footer class="footer" id="contact">
 
-    <div class="footer-container">
+    <div class="footer-main">
 
-        <div class="footer-box">
+        <div class="footer-brand">
 
-            <h2>SalesNova</h2>
+            <a href="#home" class="brand footer-logo">
+
+                <span class="brand-mark">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 17.5 10 12l3.5 3.5L20 8"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path d="M16 8h4v4"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                </span>
+
+                SalesNova
+
+            </a>
 
             <p>
-
-                Smart Sales Prediction System powered by
-                Artificial Intelligence. Helping businesses
-                make better decisions through intelligent
-                forecasting and data analytics.
-
+                A smart sales management and forecasting system
+                designed to help businesses make better decisions
+                from their data.
             </p>
 
         </div>
 
-        <div class="footer-box">
 
-            <h3>Quick Links</h3>
+        <div class="footer-column">
 
-            <ul>
+            <h3>Product</h3>
 
-                <li><a href="#home">Home</a></li>
-
-                <li><a href="#features">Features</a></li>
-
-                <li><a href="#about">Why SalesNova</a></li>
-
-                <li><a href="login.html">Login</a></li>
-
-                <li><a href="signup.html">Get Started</a></li>
-
-            </ul>
+            <a href="#features">Features</a>
+            <a href="#about">Why SalesNova</a>
+            <a href="signup.html">Get Started</a>
 
         </div>
 
-        <div class="footer-box">
+
+        <div class="footer-column">
+
+            <h3>Account</h3>
+
+            <a href="login.html">Login</a>
+            <a href="signup.html">Create Account</a>
+
+        </div>
+
+
+        <div class="footer-column">
 
             <h3>Contact</h3>
 
-            <p>📧 salesnovasupport@gmail.com</p>
+            <a href="mailto:salesnovasupport@gmail.com">
+                salesnovasupport@gmail.com
+            </a>
 
-            <p>📞 +234 9167 9091 26</p>
+            <span>
+                +234 9167 9091 26
+            </span>
 
-            <p>📍 Ogbomoso, Oyo State, Nigeria</p>
-
-        </div>
-
-        <div class="footer-box">
-
-            <h3>Follow Us</h3>
-
-            <p>💼 LinkedIn</p>
-
-            <p>🐙 GitHub</p>
-
-            <p>📘 Facebook</p>
-
-            <p>📷 Instagram</p>
+            <span>
+                Ogbomoso, Oyo State, Nigeria
+            </span>
 
         </div>
 
     </div>
 
-    <div class="copyright">
 
-        © 2026 SalesNova. All Rights Reserved.
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 SalesNova. All rights reserved.
+        </span>
+
+        <span>
+            Smart sales management and forecasting.
+        </span>
 
     </div>
 
