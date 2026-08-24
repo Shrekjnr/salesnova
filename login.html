@@ -1,286 +1,663 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SalesNova</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="project.css">
 
-<title>Login - SalesAI</title>
-
-<link rel="stylesheet" href="project.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 </head>
 
 <body class="auth-body">
 
-<div class="auth-container">
+<div class="auth-page">
 
-<div class="auth-card">
+    <!-- =====================================================
+         LEFT BRANDING PANEL
+    ====================================================== -->
 
-<div class="auth-logo">
-SalesNova
+    <section class="auth-showcase">
+
+        <div class="showcase-content">
+
+            <div class="brand">
+                <div class="brand-mark">S</div>
+
+                <div class="brand-name">
+                    Sales<span>Nova</span>
+                </div>
+            </div>
+
+            <div class="showcase-text">
+
+                <span class="showcase-badge">
+                    BUSINESS INTELLIGENCE
+                </span>
+
+                <h1>
+                    Manage your business.
+                    <span>Understand your sales.</span>
+                </h1>
+
+                <p>
+                    SalesNova helps small businesses track sales,
+                    monitor inventory, understand performance and
+                    make smarter business decisions.
+                </p>
+
+            </div>
+
+            <!-- MINI DASHBOARD VISUAL -->
+
+            <div class="mini-dashboard">
+
+                <div class="mini-dashboard-top">
+                    <span>Sales Overview</span>
+
+                    <span class="mini-status">
+                        ● Live
+                    </span>
+                </div>
+
+                <div class="mini-revenue">
+                    <span>Total Revenue</span>
+                    <strong>₦2,485,600</strong>
+                </div>
+
+                <div class="mini-chart">
+
+                    <div class="chart-bars">
+                        <span style="height:35%"></span>
+                        <span style="height:52%"></span>
+                        <span style="height:42%"></span>
+                        <span style="height:67%"></span>
+                        <span style="height:58%"></span>
+                        <span style="height:82%"></span>
+                        <span style="height:94%"></span>
+                    </div>
+
+                </div>
+
+                <div class="mini-stats">
+
+                    <div>
+                        <small>Transactions</small>
+                        <strong>1,284</strong>
+                    </div>
+
+                    <div>
+                        <small>Growth</small>
+                        <strong class="growth">+18.6%</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="showcase-footer">
+            Smart tools for smarter business decisions.
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RIGHT LOGIN PANEL
+    ====================================================== -->
+
+    <section class="auth-panel">
+
+        <div class="auth-form-container">
+
+            <!-- MOBILE / SIMPLE BRAND -->
+
+            <div class="mobile-brand">
+                <div class="brand-mark">S</div>
+
+                <div class="brand-name">
+                    Sales<span>Nova</span>
+                </div>
+            </div>
+
+
+            <!-- HEADING -->
+
+            <div class="auth-heading">
+
+                <span class="auth-welcome">
+                    WELCOME BACK
+                </span>
+
+                <h2>
+                    Sign in to your account
+                </h2>
+
+                <p>
+                    Enter your details to continue to your dashboard.
+                </p>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="message"
+                class="auth-message">
+            </div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <rect
+                                    x="3"
+                                    y="5"
+                                    width="18"
+                                    height="14"
+                                    rx="2">
+                                </rect>
+
+                                <path
+                                    d="M3 7l9 6 9-6">
+                                </path>
+
+                            </svg>
+                        </span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <div class="password-label-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                    </div>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <rect
+                                    x="4"
+                                    y="10"
+                                    width="16"
+                                    height="11"
+                                    rx="2">
+                                </rect>
+
+                                <path
+                                    d="M8 10V7a4 4 0 018 0v3">
+                                </path>
+
+                            </svg>
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            id="togglePassword"
+                            aria-label="Show password">
+
+                            <svg
+                                id="eyeIcon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <path
+                                    d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z">
+                                </path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="2.5">
+                                </circle>
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OPTIONS -->
+
+                <div class="login-options">
+
+                    <label class="remember-option">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe">
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+                    <a href="forgot_password.html">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="auth-btn"
+                    id="loginBtn">
+
+                    <span
+                        class="spinner"
+                        id="spinner">
+                    </span>
+
+                    <span id="btnText">
+                        Sign In
+                    </span>
+
+                    <svg
+                        class="btn-arrow"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2">
+
+                        <path d="M5 12h14"></path>
+                        <path d="M13 6l6 6-6 6"></path>
+
+                    </svg>
+
+                </button>
+
+            </form>
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <div class="auth-divider">
+                <span>New to SalesNova?</span>
+            </div>
+
+            <a
+                href="signup.html"
+                class="create-account-btn">
+
+                Create your account
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2">
+
+                    <path d="M5 12h14"></path>
+                    <path d="M13 6l6 6-6 6"></path>
+
+                </svg>
+
+            </a>
+
+
+            <p class="security-note">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8">
+
+                    <rect
+                        x="5"
+                        y="10"
+                        width="14"
+                        height="11"
+                        rx="2">
+                    </rect>
+
+                    <path
+                        d="M8 10V7a4 4 0 018 0v3">
+                    </path>
+
+                </svg>
+
+                Your account information is securely protected.
+
+            </p>
+
+        </div>
+
+    </section>
+
 </div>
 
-<h1>Welcome Back</h1>
-
-<p>
-Login to continue managing your business.
-</p>
-
-<div
-id="message"
-class="auth-message">
-</div>
-
-<form id="loginForm">
-
-<div class="form-group">
-
-<label>Email Address</label>
-
-<input
-type="email"
-id="email"
-placeholder="Enter your email"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Password</label>
-
-<div class="password-wrapper">
-
-<input
-type="password"
-id="password"
-placeholder="Enter your password"
-required>
-
-<span
-class="toggle-password"
-onclick="togglePassword()">
-👁
-</span>
-
-</div>
-
-</div>
-
-<div class="forgot-password">
-
-<a href="forgot_password.html">
-
-Forgot Password?
-
-</a>
-
-</div>
-
-<button
-type="submit"
-class="auth-btn"
-id="loginBtn">
-
-<div
-class="spinner"
-id="spinner">
-</div>
-
-<span id="btnText">
-
-Login
-
-</span>
-
-</button>
-
-</form>
-
-<div class="auth-link">
-
-Don't have an account?
-
-<a href="signup.html">
-
-Create Account
-
-</a>
-
-</div>
-
-</div>
-
-</div>
 
 <script>
 
-// =========================
-// SHOW PASSWORD
-// =========================
+/* =========================================================
+   PASSWORD VISIBILITY
+========================================================= */
 
-function togglePassword(){
+const togglePassword =
+    document.getElementById("togglePassword");
 
-const input=document.getElementById("password");
+const password =
+    document.getElementById("password");
 
-if(input.type==="password"){
+const eyeIcon =
+    document.getElementById("eyeIcon");
 
-input.type="text";
 
-event.target.innerHTML="🙈";
+togglePassword.addEventListener("click", function () {
 
-}else{
+    const isPassword =
+        password.type === "password";
 
-input.type="password";
+    password.type =
+        isPassword ? "text" : "password";
 
-event.target.innerHTML="👁";
+    togglePassword.setAttribute(
+        "aria-label",
+        isPassword
+            ? "Hide password"
+            : "Show password"
+    );
 
-}
+    if (isPassword) {
 
-}
+        eyeIcon.innerHTML = `
+            <path
+                d="M3 3l18 18">
+            </path>
 
+            <path
+                d="M10.6 10.6a2 2 0 002.8 2.8">
+            </path>
 
+            <path
+                d="M9.9 5.1A9.8 9.8 0 0112 5c6.5 0 10 7 10 7a18.5 18.5 0 01-3.2 4.1">
+            </path>
 
-// =========================
-// LOGIN
-// =========================
+            <path
+                d="M6.1 6.1C3.4 8.1 2 12 2 12s3.5 7 10 7a9.8 9.8 0 004.1-.9">
+            </path>
+        `;
 
-document.getElementById("loginForm")
+    } else {
 
-.addEventListener("submit",async function(e){
+        eyeIcon.innerHTML = `
+            <path
+                d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z">
+            </path>
 
-e.preventDefault();
+            <circle
+                cx="12"
+                cy="12"
+                r="2.5">
+            </circle>
+        `;
 
-const email=document.getElementById("email").value.trim().toLowerCase();
-
-const password=document.getElementById("password").value;
-
-const message=document.getElementById("message");
-
-const spinner=document.getElementById("spinner");
-
-const btn=document.getElementById("loginBtn");
-
-const btnText=document.getElementById("btnText");
-
-message.className="auth-message";
-
-message.style.display="none";
-
-
-// =========================
-// EMAIL VALIDATION
-// =========================
-
-const emailPattern=/^[A-Za-z0-9._%+-]+@gmail\.com$/i;
-
-if(!emailPattern.test(email)){
-
-message.classList.add("error-message");
-
-message.style.display="block";
-
-message.innerHTML="Please enter a valid email address.";
-
-return;
-
-}
-
-
-spinner.style.display="block";
-
-btn.disabled=true;
-
-btnText.innerHTML="Signing In...";
-
-try{
-
-const response=await fetch(
-
-"/login",
-
-{
-
-method:"POST",
-
-credentials:"include",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify({
-
-email,
-
-password
-
-})
-
-}
-
-);
-
-const result=await response.json();
-
-spinner.style.display="none";
-
-btn.disabled=false;
-
-btnText.innerHTML="Login";
-
-if(result.message){
-
-message.classList.add("success-message");
-
-message.style.display="block";
-
-message.innerHTML="Login successful...";
-
-setTimeout(function(){
-
-window.location.href="dashboard.html";
-
-},1000);
-
-}else{
-
-message.classList.add("error-message");
-
-message.style.display="block";
-
-message.innerHTML=result.error;
-
-}
-
-}
-
-catch(error){
-
-spinner.style.display="none";
-
-btn.disabled=false;
-
-btnText.innerHTML="Login";
-
-message.classList.add("error-message");
-
-message.style.display="block";
-
-message.innerHTML="Unable to connect to the server.";
-
-}
+    }
 
 });
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function (e) {
+
+        e.preventDefault();
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim()
+                .toLowerCase();
+
+        const passwordValue =
+            document.getElementById("password").value;
+
+        const message =
+            document.getElementById("message");
+
+        const spinner =
+            document.getElementById("spinner");
+
+        const btn =
+            document.getElementById("loginBtn");
+
+        const btnText =
+            document.getElementById("btnText");
+
+        const rememberMe =
+            document.getElementById("rememberMe").checked;
+
+
+        /* RESET MESSAGE */
+
+        message.className = "auth-message";
+        message.style.display = "none";
+        message.textContent = "";
+
+
+        /* EMAIL VALIDATION */
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+
+            message.classList.add(
+                "error-message"
+            );
+
+            message.style.display = "block";
+
+            message.textContent =
+                "Please enter a valid email address.";
+
+            return;
+        }
+
+
+        /* PASSWORD VALIDATION */
+
+        if (passwordValue.length === 0) {
+
+            message.classList.add(
+                "error-message"
+            );
+
+            message.style.display = "block";
+
+            message.textContent =
+                "Please enter your password.";
+
+            return;
+        }
+
+
+        /* LOADING STATE */
+
+        spinner.style.display = "block";
+
+        btn.disabled = true;
+
+        btnText.textContent =
+            "Signing in...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/login",
+                    {
+                        method: "POST",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email: email,
+                            password: passwordValue,
+                            remember: rememberMe
+                        })
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            /* STOP LOADING */
+
+            spinner.style.display = "none";
+
+            btn.disabled = false;
+
+            btnText.textContent =
+                "Sign In";
+
+
+            /* SUCCESS */
+
+            if (result.message) {
+
+                message.classList.add(
+                    "success-message"
+                );
+
+                message.style.display =
+                    "block";
+
+                message.textContent =
+                    "Login successful. Redirecting...";
+
+
+                setTimeout(function () {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }, 700);
+
+
+            } else {
+
+                message.classList.add(
+                    "error-message"
+                );
+
+                message.style.display =
+                    "block";
+
+                message.textContent =
+                    result.error ||
+                    "Invalid email or password.";
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            spinner.style.display =
+                "none";
+
+            btn.disabled =
+                false;
+
+            btnText.textContent =
+                "Sign In";
+
+
+            message.classList.add(
+                "error-message"
+            );
+
+            message.style.display =
+                "block";
+
+            message.textContent =
+                "Unable to connect to the server. Please try again.";
+
+        }
+
+    });
 
 </script>
 
 </body>
-
 </html>

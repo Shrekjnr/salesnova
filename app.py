@@ -1,9 +1,12 @@
-﻿from flask import Flask, request, jsonify, session, send_from_directory
+from flask import Flask, request, jsonify, session, send_from_directory
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 import os
+import secrets
+import smtplib
+from email.message import EmailMessage
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 import re
 import psycopg2
@@ -126,6 +129,22 @@ def init_db():
                 low_stock_alert_sent INTEGER DEFAULT 0,
                 out_of_stock_alert_sent INTEGER DEFAULT 0
             )
+        """)
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS password_reset_tokens (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL,
+                token TEXT UNIQUE NOT NULL,
+                expires_at TIMESTAMP NOT NULL,
+                used INTEGER DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_password_resets_user_id
+            ON password_resets(user_id)
         """)
 
         # Safe migrations for databases created by older versions.
@@ -541,6 +560,323 @@ def logout():
         "message": "Logged out successfully."
     })
 
+# =========================================================
+# FORGOT PASSWORD / PASSWORD RESET
+# =========================================================
+
+def send_password_reset_email(recipient_email, reset_link):
+    """
+    Sends the password reset email using SMTP credentials
+    stored in environment variables.
+    """
+
+    smtp_host = os.environ.get("SMTP_HOST")
+    smtp_port = int(os.environ.get("SMTP_PORT", "587"))
+    smtp_username = os.environ.get("SMTP_USERNAME")
+    smtp_password = os.environ.get("SMTP_PASSWORD")
+    sender_email = os.environ.get(
+        "SMTP_FROM",
+        smtp_username
+    )
+
+    if not smtp_host or not smtp_username or not smtp_password:
+        raise RuntimeError(
+            "Email service is not configured."
+        )
+
+    message = EmailMessage()
+
+    message["Subject"] = "SalesAI Password Reset"
+    message["From"] = sender_email
+    message["To"] = recipient_email
+
+    message.set_content(
+        f"""Hello,
+
+We received a request to reset your SalesAI password.
+
+Click the link below to create a new password:
+
+{reset_link}
+
+This link will expire in 30 minutes.
+
+If you did not request a password reset, you can safely ignore this email.
+
+SalesAI
+"""
+    )
+
+    with smtplib.SMTP(
+        smtp_host,
+        smtp_port,
+        timeout=20
+    ) as smtp:
+
+        smtp.starttls()
+
+        smtp.login(
+            smtp_username,
+            smtp_password
+        )
+
+        smtp.send_message(message)
+
+
+@app.route("/forgot_password", methods=["POST"])
+def forgot_password():
+
+    data = request.get_json(silent=True) or {}
+
+    email = str(
+        data.get("email", "")
+    ).strip().lower()
+
+    if not email:
+        return jsonify({
+            "error": "Please enter your email address."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    try:
+
+        cursor.execute("""
+            SELECT id, email, fullname
+            FROM users
+            WHERE LOWER(email) = LOWER(%s)
+        """, (email,))
+
+        user = cursor.fetchone()
+
+        # Don't reveal whether an email exists.
+        if not user:
+
+            return jsonify({
+                "message":
+                    "If an account exists for this email, "
+                    "a password reset link has been sent."
+            }), 200
+
+        # Invalidate previous unused tokens.
+        cursor.execute("""
+            UPDATE password_reset_tokens
+            SET used = 1
+            WHERE user_id = %s
+              AND used = 0
+        """, (user["id"],))
+
+        # Generate secure random token.
+        token = secrets.token_urlsafe(48)
+
+        expires_at = datetime.now() + timedelta(
+            minutes=30
+        )
+
+        cursor.execute("""
+            INSERT INTO password_reset_tokens
+                (
+                    user_id,
+                    token,
+                    expires_at,
+                    used
+                )
+            VALUES
+                (%s, %s, %s, 0)
+        """, (
+            user["id"],
+            token,
+            expires_at
+        ))
+
+        conn.commit()
+
+        # IMPORTANT:
+        # This should point to your actual deployed
+        # reset_password.html page.
+        reset_link = (
+            f"{FRONTEND_URL}/reset_password.html"
+            f"?token={token}"
+        )
+
+        try:
+
+            send_password_reset_email(
+                user["email"],
+                reset_link
+            )
+
+        except Exception as email_error:
+
+            print(
+                "PASSWORD RESET EMAIL ERROR:",
+                email_error
+            )
+
+            # Remove the token if email failed.
+            cursor.execute("""
+                DELETE FROM password_reset_tokens
+                WHERE token = %s
+            """, (token,))
+
+            conn.commit()
+
+            return jsonify({
+                "error":
+                    "Unable to send the reset email. "
+                    "Please try again later."
+            }), 500
+
+    except Exception as exc:
+
+        conn.rollback()
+
+        print(
+            "FORGOT PASSWORD ERROR:",
+            exc
+        )
+
+        return jsonify({
+            "error":
+                "Unable to process password reset request."
+        }), 500
+
+    finally:
+
+        cursor.close()
+        conn.close()
+
+    return jsonify({
+        "message":
+            "Password reset link sent successfully. "
+            "Please check your email."
+    }), 200
+
+
+@app.route("/reset_password", methods=["POST"])
+def reset_password():
+
+    data = request.get_json(silent=True) or {}
+
+    token = str(
+        data.get("token", "")
+    ).strip()
+
+    new_password = str(
+        data.get("password", "")
+    )
+
+    confirm_password = str(
+        data.get("confirm_password", "")
+    )
+
+    if not token:
+        return jsonify({
+            "error": "Invalid password reset link."
+        }), 400
+
+    if not new_password or not confirm_password:
+        return jsonify({
+            "error": "Please fill in both password fields."
+        }), 400
+
+    if new_password != confirm_password:
+        return jsonify({
+            "error": "Passwords do not match."
+        }), 400
+
+    if len(new_password) < 8:
+        return jsonify({
+            "error":
+                "Password must contain at least 8 characters."
+        }), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    try:
+
+        cursor.execute("""
+            SELECT
+                id,
+                user_id,
+                expires_at,
+                used
+            FROM password_reset_tokens
+            WHERE token = %s
+            LIMIT 1
+        """, (token,))
+
+        reset_token = cursor.fetchone()
+
+        if not reset_token:
+            return jsonify({
+                "error":
+                    "Invalid or expired password reset link."
+            }), 400
+
+        if reset_token["used"]:
+            return jsonify({
+                "error":
+                    "This password reset link has already been used."
+            }), 400
+
+        expires_at = reset_token["expires_at"]
+
+        if expires_at < datetime.now():
+            return jsonify({
+                "error":
+                    "This password reset link has expired."
+            }), 400
+
+        hashed_password = generate_password_hash(
+            new_password
+        )
+
+        cursor.execute("""
+            UPDATE users
+            SET password = %s
+            WHERE id = %s
+        """, (
+            hashed_password,
+            reset_token["user_id"]
+        ))
+
+        cursor.execute("""
+            UPDATE password_reset_tokens
+            SET used = 1
+            WHERE id = %s
+        """, (
+            reset_token["id"],
+        ))
+
+        conn.commit()
+
+    except Exception as exc:
+
+        conn.rollback()
+
+        print(
+            "RESET PASSWORD ERROR:",
+            exc
+        )
+
+        return jsonify({
+            "error":
+                "Unable to reset password."
+        }), 500
+
+    finally:
+
+        cursor.close()
+        conn.close()
+
+    return jsonify({
+        "message":
+            "Password reset successfully. "
+            "You can now login with your new password."
+    }), 200
 
 # =========================================================
 # USER / PROFILE
@@ -790,51 +1126,211 @@ def uploaded_file(filename):
 # PASSWORD
 # =========================================================
 
+def create_password_reset_token(user_id):
+    """
+    Creates a secure one-time password reset token.
+    Only the SHA-256 hash is stored in the database.
+    """
+
+    token = secrets.token_urlsafe(48)
+
+    token_hash = hashlib.sha256(
+        token.encode("utf-8")
+    ).hexdigest()
+
+    expires_at = datetime.utcnow() + timedelta(minutes=30)
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    try:
+        # Remove previous unused tokens for this user.
+        cursor.execute("""
+            DELETE FROM password_resets
+            WHERE user_id = %s
+        """, (user_id,))
+
+        cursor.execute("""
+            INSERT INTO password_resets
+                (
+                    user_id,
+                    token_hash,
+                    expires_at,
+                    used
+                )
+            VALUES
+                (%s, %s, %s, 0)
+        """, (
+            user_id,
+            token_hash,
+            expires_at
+        ))
+
+        conn.commit()
+
+    except Exception:
+        conn.rollback()
+        raise
+
+    finally:
+        cursor.close()
+        conn.close()
+
+    return token
+
+
+def send_password_reset_email(email, reset_link):
+    """
+    Sends the password reset email using SMTP settings
+    supplied through Vercel environment variables.
+    """
+
+    smtp_host = os.environ.get("SMTP_HOST")
+    smtp_port = int(
+        os.environ.get("SMTP_PORT", "587")
+    )
+    smtp_username = os.environ.get("SMTP_USERNAME")
+    smtp_password = os.environ.get("SMTP_PASSWORD")
+    smtp_from = os.environ.get(
+        "SMTP_FROM",
+        smtp_username
+    )
+
+    if not smtp_host:
+        raise RuntimeError(
+            "SMTP_HOST environment variable is not configured."
+        )
+
+    if not smtp_username:
+        raise RuntimeError(
+            "SMTP_USERNAME environment variable is not configured."
+        )
+
+    if not smtp_password:
+        raise RuntimeError(
+            "SMTP_PASSWORD environment variable is not configured."
+        )
+
+    if not smtp_from:
+        raise RuntimeError(
+            "SMTP_FROM environment variable is not configured."
+        )
+
+    message = EmailMessage()
+
+    message["Subject"] = "SalesAI Password Reset"
+    message["From"] = smtp_from
+    message["To"] = email
+
+    message.set_content(
+        f"""Hello,
+
+We received a request to reset your SalesAI password.
+
+Click the link below to create a new password:
+
+{reset_link}
+
+This link will expire in 30 minutes and can only be used once.
+
+If you did not request a password reset, you can safely ignore this email.
+
+SalesAI
+"""
+    )
+
+    with smtplib.SMTP(
+        smtp_host,
+        smtp_port,
+        timeout=20
+    ) as smtp:
+
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.ehlo()
+
+        smtp.login(
+            smtp_username,
+            smtp_password
+        )
+
+        smtp.send_message(message)
+
+
 @app.route("/change_password", methods=["POST", "PUT"])
 def change_password():
+
     auth = require_login()
+
     if auth:
         return auth
 
     data = request.get_json(silent=True) or {}
 
-    current_password = str(data.get("current_password", ""))
-    new_password = str(data.get("new_password", ""))
-    confirm_password = str(data.get("confirm_password", ""))
+    current_password = str(
+        data.get("current_password", "")
+    )
 
-    if not current_password or not new_password or not confirm_password:
+    new_password = str(
+        data.get("new_password", "")
+    )
+
+    confirm_password = str(
+        data.get("confirm_password", "")
+    )
+
+    if (
+        not current_password
+        or not new_password
+        or not confirm_password
+    ):
+
         return jsonify({
-            "error": "Please fill in all password fields."
+            "error": (
+                "Please fill in all password fields."
+            )
         }), 400
 
     if new_password != confirm_password:
+
         return jsonify({
             "error": "New passwords do not match."
         }), 400
 
     if len(new_password) < 6:
+
         return jsonify({
-            "error": "New password must contain at least 6 characters."
+            "error": (
+                "New password must contain at least 6 characters."
+            )
         }), 400
 
     conn = get_db()
     cursor = conn.cursor()
 
     try:
+
         cursor.execute("""
             SELECT password
             FROM users
             WHERE id = %s
-        """, (current_user_id(),))
+        """, (
+            current_user_id(),
+        ))
+
         user = cursor.fetchone()
 
         if user is None:
-            return jsonify({"error": "User not found."}), 404
+
+            return jsonify({
+                "error": "User not found."
+            }), 404
 
         if not check_password_hash(
             user["password"],
             current_password
         ):
+
             return jsonify({
                 "error": "Current password is incorrect."
             }), 401
@@ -851,20 +1347,26 @@ def change_password():
         conn.commit()
 
     except Exception as exc:
+
         conn.rollback()
-        print("CHANGE PASSWORD ERROR:", exc)
+
+        print(
+            "CHANGE PASSWORD ERROR:",
+            exc
+        )
+
         return jsonify({
             "error": "Unable to change password."
         }), 500
 
     finally:
+
         cursor.close()
         conn.close()
 
     return jsonify({
         "message": "Password changed successfully."
     })
-
 
 # =========================================================
 # SETTINGS
@@ -1070,63 +1572,118 @@ def add_product():
             "Stock",
             minimum=0
         )
+
         price = parse_nonnegative_float(
             data.get("price", 0),
             "Price"
         )
+
     except ValueError as exc:
         return jsonify({"error": str(exc)}), 400
 
     if not product_name:
-        return jsonify({"error": "Product name is required."}), 400
+        return jsonify({
+            "error": "Product name is required."
+        }), 400
 
     conn = get_db()
     cursor = conn.cursor()
 
     try:
+
         cursor.execute("""
-            SELECT id
+            SELECT id, stock
             FROM products
             WHERE user_id = %s
               AND LOWER(product_name) = LOWER(%s)
-        """, (current_user_id(), product_name))
-
-        if cursor.fetchone():
-            return jsonify({
-                "error": "A product with this name already exists."
-            }), 400
-
-        cursor.execute("""
-            INSERT INTO products
-                (user_id, product_name, stock, price, created_at)
-            VALUES (%s, %s, %s, %s, %s)
-            RETURNING id
+            LIMIT 1
         """, (
             current_user_id(),
-            product_name,
-            stock,
-            price,
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            product_name
         ))
 
-        product_id = cursor.fetchone()["id"]
+        existing_product = cursor.fetchone()
+
+        if existing_product:
+
+            new_stock = (
+                int(existing_product["stock"] or 0)
+                + int(stock)
+            )
+
+            cursor.execute("""
+                UPDATE products
+                SET stock = %s,
+                    price = %s
+                WHERE id = %s
+                  AND user_id = %s
+            """, (
+                new_stock,
+                price,
+                existing_product["id"],
+                current_user_id()
+            ))
+
+            product_id = existing_product["id"]
+
+            message = (
+                "Product stock updated successfully."
+            )
+
+        else:
+
+            cursor.execute("""
+                INSERT INTO products
+                    (
+                        user_id,
+                        product_name,
+                        stock,
+                        price,
+                        created_at
+                    )
+                VALUES
+                    (%s, %s, %s, %s, %s)
+                RETURNING id
+            """, (
+                current_user_id(),
+                product_name,
+                stock,
+                price,
+                datetime.now().strftime(
+                    "%Y-%m-%d %H:%M:%S"
+                )
+            ))
+
+            product_id = cursor.fetchone()["id"]
+
+            message = (
+                "Product added successfully."
+            )
+
         conn.commit()
 
     except Exception as exc:
+
         conn.rollback()
-        print("ADD PRODUCT ERROR:", exc)
+
+        print(
+            "ADD PRODUCT ERROR:",
+            exc
+        )
+
         return jsonify({
             "error": "Unable to add product."
         }), 500
+
     finally:
+
         cursor.close()
         conn.close()
 
     return jsonify({
-        "message": "Product added successfully.",
+        "message": message,
         "product_id": product_id
     }), 201
-
 
 @app.route("/products", methods=["GET"])
 def products():
@@ -1368,6 +1925,72 @@ def delete_product(product_id):
 
 
 # =========================================================
+# SALES CHART DATA
+# =========================================================
+
+@app.route("/sales_chart_data")
+def sales_chart_data():
+
+    auth = require_login()
+    if auth:
+        return auth
+
+    user_id = current_user_id()
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    try:
+
+        cursor.execute("""
+            SELECT
+                sale_date,
+                COALESCE(SUM(total), 0) AS total_sales
+            FROM sales
+            WHERE user_id = %s
+            GROUP BY sale_date
+            ORDER BY sale_date ASC
+        """, (user_id,))
+
+        rows = cursor.fetchall()
+
+        labels = []
+        values = []
+
+        for row in rows:
+
+            sale_date = row["sale_date"]
+
+            if hasattr(sale_date, "strftime"):
+                label = sale_date.strftime("%Y-%m-%d")
+            else:
+                label = str(sale_date)
+
+            labels.append(label)
+
+            values.append(
+                float(row["total_sales"] or 0)
+            )
+
+        return jsonify({
+            "labels": labels,
+            "values": values
+        })
+
+    except Exception as exc:
+
+        print("SALES CHART DATA ERROR:", exc)
+
+        return jsonify({
+            "error": "Unable to load sales chart data."
+        }), 500
+
+    finally:
+
+        cursor.close()
+        conn.close()
+
+# =========================================================
 # SALES
 # =========================================================
 
@@ -1577,166 +2200,91 @@ def delete_sale(sale_id):
     })
 
 
-async function loadDashboardStats() {
+# =========================================================
+# DASHBOARD STATISTICS
+# =========================================================
 
-    try {
+@app.route("/dashboard_stats")
+def dashboard_stats():
+    auth = require_login()
+    if auth:
+        return auth
 
-        const response = await fetch(
-            "/dashboard_stats",
+    conn = get_db()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            SELECT
+                COUNT(*) AS transactions,
+                COALESCE(SUM(total), 0) AS total_sales,
+                COALESCE(SUM(quantity), 0) AS products_sold
+            FROM sales
+            WHERE user_id = %s
+        """, (current_user_id(),))
+        stats = cursor.fetchone()
+
+        cursor.execute("""
+            SELECT
+                COALESCE(SUM(total), 0) AS today_sales,
+                COUNT(*) AS today_transactions,
+                COALESCE(SUM(quantity), 0) AS today_products_sold
+            FROM sales
+            WHERE user_id = %s
+              AND LEFT(sale_date, 10) = %s
+        """, (
+            current_user_id(),
+            date.today().isoformat()
+        ))
+        today = cursor.fetchone()
+
+        cursor.execute("""
+            SELECT
+                product,
+                COALESCE(SUM(quantity), 0) AS quantity_sold
+            FROM sales
+            WHERE user_id = %s
+            GROUP BY product
+            ORDER BY quantity_sold DESC, product ASC
+            LIMIT 1
+        """, (current_user_id(),))
+        best = cursor.fetchone()
+
+        cursor.execute("""
+            SELECT
+                LEFT(sale_date, 10) AS sale_day,
+                COALESCE(SUM(total), 0) AS total
+            FROM sales
+            WHERE user_id = %s
+            GROUP BY LEFT(sale_date, 10)
+            ORDER BY sale_day ASC
+        """, (current_user_id(),))
+        chart_rows = cursor.fetchall()
+
+    finally:
+        cursor.close()
+        conn.close()
+
+    prediction = calculate_prediction(current_user_id())
+
+    return jsonify({
+        "transactions": int(stats["transactions"] or 0),
+        "total_sales": float(stats["total_sales"] or 0),
+        "products_sold": int(stats["products_sold"] or 0),
+        "today_sales": float(today["today_sales"] or 0),
+        "today_transactions": int(today["today_transactions"] or 0),
+        "today_products_sold": int(today["today_products_sold"] or 0),
+        "best_selling_product": best["product"] if best else None,
+        "best_selling_quantity": int(best["quantity_sold"] or 0) if best else 0,
+        "predicted_next_sale": prediction["tomorrow"],
+        "chart": [
             {
-                credentials: "include"
+                "date": row["sale_day"],
+                "total": float(row["total"] or 0)
             }
-        );
-
-        if (!response.ok) {
-            throw new Error("Unable to load dashboard statistics");
-        }
-
-        const data = await response.json();
-
-        if (data.error) {
-            console.log("Dashboard API error:", data.error);
-            return;
-        }
-
-        /* TOTAL SALES */
-        const totalSales =
-            document.getElementById("totalSales");
-
-        if (totalSales) {
-            totalSales.innerText =
-                "₦" +
-                Number(data.total_sales || 0)
-                    .toLocaleString();
-        }
-
-        /* PRODUCTS SOLD */
-        const productsSold =
-            document.getElementById("productsSold");
-
-        if (productsSold) {
-            productsSold.innerText =
-                Number(data.products_sold || 0)
-                    .toLocaleString();
-        }
-
-        /* TRANSACTIONS */
-        const transactions =
-            document.getElementById("transactions");
-
-        if (transactions) {
-            transactions.innerText =
-                Number(data.transactions || 0)
-                    .toLocaleString();
-        }
-
-        /* BEST SELLER */
-        const bestSeller =
-            document.getElementById("bestSeller");
-
-        if (bestSeller) {
-            bestSeller.innerText =
-                data.best_selling_product ||
-                "None";
-        }
-
-        /* TODAY'S SALES */
-        const todaySales =
-            document.getElementById("todaySales");
-
-        if (todaySales) {
-            todaySales.innerText =
-                "₦" +
-                Number(data.today_sales || 0)
-                    .toLocaleString();
-        }
-
-        /* PERFORMANCE SALES */
-        const performanceSales =
-            document.getElementById("performanceSales");
-
-        if (performanceSales) {
-            performanceSales.innerText =
-                "₦" +
-                Number(data.total_sales || 0)
-                    .toLocaleString();
-        }
-
-        /* PERFORMANCE TRANSACTIONS */
-        const performanceTransactions =
-            document.getElementById(
-                "performanceTransactions"
-            );
-
-        if (performanceTransactions) {
-            performanceTransactions.innerText =
-                Number(data.transactions || 0)
-                    .toLocaleString();
-        }
-
-        /* AVERAGE SALE */
-        const averageSale =
-            document.getElementById("averageSale");
-
-        if (averageSale) {
-
-            const total =
-                Number(data.total_sales || 0);
-
-            const transactionCount =
-                Number(data.transactions || 0);
-
-            const average =
-                transactionCount > 0
-                    ? total / transactionCount
-                    : 0;
-
-            averageSale.innerText =
-                "₦" +
-                average.toLocaleString(
-                    undefined,
-                    {
-                        maximumFractionDigits: 2
-                    }
-                );
-        }
-
-        /* PREDICTED NEXT SALE */
-        const prediction =
-            document.getElementById("prediction");
-
-        if (prediction) {
-            prediction.innerText =
-                "₦" +
-                Number(
-                    data.predicted_next_sale || 0
-                ).toLocaleString();
-        }
-
-        const performancePrediction =
-            document.getElementById(
-                "performancePrediction"
-            );
-
-        if (performancePrediction) {
-            performancePrediction.innerText =
-                "₦" +
-                Number(
-                    data.predicted_next_sale || 0
-                ).toLocaleString();
-        }
-
-    }
-    catch (error) {
-
-        console.error(
-            "Dashboard stats error:",
-            error
-        );
-
-    }
-
-}
+            for row in chart_rows
+        ]
+    })
 
 
 # =========================================================
@@ -2032,9 +2580,9 @@ def prediction_products():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
+
     app.run(
         host="0.0.0.0",
         port=port,
         debug=os.environ.get("FLASK_DEBUG", "0") == "1"
     )
-

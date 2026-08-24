@@ -1,4 +1,8 @@
-﻿Flask
-flask-cors
-Werkzeug
-psycopg2-binary
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
+    }
+  ]
+}

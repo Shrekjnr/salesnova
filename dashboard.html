@@ -660,8 +660,6 @@ async function loadUser() {
             return;
         }
 
-        /* BUSINESS NAME */
-
         const businessName =
             document.getElementById("businessName");
 
@@ -670,34 +668,23 @@ async function loadUser() {
                 user.business || "Business";
         }
 
-        /* WELCOME TEXT */
-
         const welcomeText =
             document.getElementById("welcomeText");
 
         if (welcomeText) {
-
             welcomeText.innerText =
                 "Welcome back, " +
                 (user.fullname || "User") +
                 " 👋";
-
         }
-
-        /* SIDEBAR USER NAME */
 
         const sidebarUserName =
             document.getElementById("sidebarUserName");
 
         if (sidebarUserName) {
-
             sidebarUserName.innerText =
-                user.fullname ||
-                "Administrator";
-
+                user.fullname || "Administrator";
         }
-
-        /* PROFILE IMAGE */
 
         const sidebarProfileImage =
             document.getElementById(
@@ -708,15 +695,14 @@ async function loadUser() {
             sidebarProfileImage &&
             user.profile_image
         ) {
-
             sidebarProfileImage.src =
                 user.profile_image +
                 "?t=" +
                 Date.now();
-
         }
 
     }
+
     catch (error) {
 
         console.error(
@@ -745,127 +731,72 @@ async function loadDashboardStats() {
         );
 
         if (!response.ok) {
-
             throw new Error(
                 "Unable to load dashboard statistics"
             );
-
         }
 
         const data =
             await response.json();
 
         if (data.error) {
-
             console.error(
                 "Dashboard API error:",
                 data.error
             );
-
             return;
-
         }
 
-
-        /* =================================================
-           TOTAL SALES
-        ================================================= */
-
         const totalSales =
-            document.getElementById(
-                "totalSales"
-            );
+            document.getElementById("totalSales");
 
         if (totalSales) {
-
             totalSales.innerText =
                 "₦" +
                 Number(
                     data.total_sales || 0
                 ).toLocaleString();
-
         }
 
-
-        /* =================================================
-           PRODUCTS SOLD
-        ================================================= */
-
         const productsSold =
-            document.getElementById(
-                "productsSold"
-            );
+            document.getElementById("productsSold");
 
         if (productsSold) {
-
             productsSold.innerText =
                 Number(
                     data.products_sold || 0
                 ).toLocaleString();
-
         }
 
-
-        /* =================================================
-           TRANSACTIONS
-        ================================================= */
-
         const transactions =
-            document.getElementById(
-                "transactions"
-            );
+            document.getElementById("transactions");
 
         if (transactions) {
-
             transactions.innerText =
                 Number(
                     data.transactions || 0
                 ).toLocaleString();
-
         }
 
-
-        /* =================================================
-           BEST SELLER
-        ================================================= */
-
         const bestSeller =
-            document.getElementById(
-                "bestSeller"
-            );
+            document.getElementById("bestSeller");
 
         if (bestSeller) {
-
             bestSeller.innerText =
                 data.best_selling_product ||
                 "None";
-
         }
 
-
-        /* =================================================
-           TODAY'S SALES
-        ================================================= */
-
         const todaySales =
-            document.getElementById(
-                "todaySales"
-            );
+            document.getElementById("todaySales");
 
         if (todaySales) {
-
             todaySales.innerText =
                 "₦" +
                 Number(
                     data.today_sales || 0
                 ).toLocaleString();
-
         }
-
-
-        /* =================================================
-           PERFORMANCE SALES
-        ================================================= */
 
         const performanceSales =
             document.getElementById(
@@ -873,19 +804,12 @@ async function loadDashboardStats() {
             );
 
         if (performanceSales) {
-
             performanceSales.innerText =
                 "₦" +
                 Number(
                     data.total_sales || 0
                 ).toLocaleString();
-
         }
-
-
-        /* =================================================
-           PERFORMANCE TRANSACTIONS
-        ================================================= */
 
         const performanceTransactions =
             document.getElementById(
@@ -893,38 +817,22 @@ async function loadDashboardStats() {
             );
 
         if (performanceTransactions) {
-
             performanceTransactions.innerText =
                 Number(
                     data.transactions || 0
                 ).toLocaleString();
-
         }
 
-
-        /* =================================================
-           PREDICTED NEXT SALE
-        ================================================= */
-
         const prediction =
-            document.getElementById(
-                "prediction"
-            );
+            document.getElementById("prediction");
 
         if (prediction) {
-
             prediction.innerText =
                 "₦" +
                 Number(
                     data.predicted_next_sale || 0
                 ).toLocaleString();
-
         }
-
-
-        /* =================================================
-           PERFORMANCE PREDICTION
-        ================================================= */
 
         const performancePrediction =
             document.getElementById(
@@ -932,19 +840,12 @@ async function loadDashboardStats() {
             );
 
         if (performancePrediction) {
-
             performancePrediction.innerText =
                 "₦" +
                 Number(
                     data.predicted_next_sale || 0
                 ).toLocaleString();
-
         }
-
-
-        /* =================================================
-           AVERAGE SALE VALUE
-        ================================================= */
 
         const averageSale =
             document.getElementById(
@@ -966,11 +867,9 @@ async function loadDashboardStats() {
             let average = 0;
 
             if (transactionCount > 0) {
-
                 average =
                     total /
                     transactionCount;
-
             }
 
             averageSale.innerText =
@@ -981,10 +880,10 @@ async function loadDashboardStats() {
                         maximumFractionDigits: 2
                     }
                 );
-
         }
 
     }
+
     catch (error) {
 
         console.error(
@@ -1013,37 +912,26 @@ async function loadPrediction() {
         );
 
         if (!response.ok) {
-
             throw new Error(
                 "Unable to load prediction"
             );
-
         }
 
         const data =
             await response.json();
 
         if (data.error) {
-
             console.error(
                 "Prediction API error:",
                 data.error
             );
-
             return;
-
         }
-
 
         const predictionValue =
             Number(
                 data.tomorrow || 0
             );
-
-
-        /* =================================================
-           MAIN PREDICTION CARD
-        ================================================= */
 
         const prediction =
             document.getElementById(
@@ -1051,17 +939,10 @@ async function loadPrediction() {
             );
 
         if (prediction) {
-
             prediction.innerText =
                 "₦" +
                 predictionValue.toLocaleString();
-
         }
-
-
-        /* =================================================
-           PERFORMANCE OVERVIEW
-        ================================================= */
 
         const performancePrediction =
             document.getElementById(
@@ -1069,17 +950,10 @@ async function loadPrediction() {
             );
 
         if (performancePrediction) {
-
             performancePrediction.innerText =
                 "₦" +
                 predictionValue.toLocaleString();
-
         }
-
-
-        /* =================================================
-           BUSINESS INSIGHT
-        ================================================= */
 
         const businessInsight =
             document.getElementById(
@@ -1096,6 +970,7 @@ async function loadPrediction() {
                     " in sales for tomorrow.";
 
             }
+
             else {
 
                 businessInsight.innerText =
@@ -1107,6 +982,7 @@ async function loadPrediction() {
         }
 
     }
+
     catch (error) {
 
         console.error(
@@ -1125,15 +1001,9 @@ async function loadPrediction() {
 
 let salesChart = null;
 
-
 async function loadSalesChart() {
 
     try {
-
-        /*
-         * The chart data is already returned by
-         * /dashboard_stats.
-         */
 
         const response = await fetch(
             "/dashboard_stats",
@@ -1143,31 +1013,21 @@ async function loadSalesChart() {
         );
 
         if (!response.ok) {
-
             throw new Error(
                 "Unable to load sales chart"
             );
-
         }
 
         const data =
             await response.json();
 
         if (data.error) {
-
             console.error(
                 "Chart API error:",
                 data.error
             );
-
             return;
-
         }
-
-
-        /* =================================================
-           FIND CANVAS
-        ================================================= */
 
         const canvas =
             document.getElementById(
@@ -1175,72 +1035,41 @@ async function loadSalesChart() {
             );
 
         if (!canvas) {
-
-            console.error(
-                "salesChart canvas not found"
-            );
-
             return;
-
         }
-
-
-        /* =================================================
-           GET CHART DATA
-        ================================================= */
 
         const chartRows =
             Array.isArray(data.chart)
                 ? data.chart
                 : [];
 
-
         const labels =
             chartRows.map(
                 function(row) {
-
                     return row.date;
-
                 }
             );
-
 
         const values =
             chartRows.map(
                 function(row) {
-
                     return Number(
                         row.total || 0
                     );
-
                 }
             );
-
 
         const ctx =
             canvas.getContext("2d");
 
-
-        /* =================================================
-           DESTROY OLD CHART
-        ================================================= */
-
         if (salesChart) {
-
             salesChart.destroy();
-
         }
-
-
-        /* =================================================
-           CREATE CHART
-        ================================================= */
 
         salesChart =
             new Chart(
                 ctx,
                 {
-
                     type: "line",
 
                     data: {
@@ -1248,54 +1077,36 @@ async function loadSalesChart() {
                         labels: labels,
 
                         datasets: [
-
                             {
-
                                 label:
                                     "Daily Sales (₦)",
 
                                 data: values,
 
-                                borderWidth:
-                                    3,
+                                borderWidth: 3,
 
-                                tension:
-                                    0.4,
+                                tension: 0.4,
 
-                                fill:
-                                    false,
+                                fill: false,
 
-                                pointRadius:
-                                    4,
+                                pointRadius: 4,
 
-                                pointHoverRadius:
-                                    6
-
+                                pointHoverRadius: 6
                             }
-
                         ]
-
                     },
-
 
                     options: {
 
-                        responsive:
-                            true,
+                        responsive: true,
 
-                        maintainAspectRatio:
-                            false,
-
+                        maintainAspectRatio: false,
 
                         plugins: {
 
                             legend: {
-
-                                display:
-                                    true
-
+                                display: true
                             },
-
 
                             tooltip: {
 
@@ -1307,26 +1118,20 @@ async function loadSalesChart() {
                                             return (
                                                 " ₦" +
                                                 Number(
-                                                    context.raw ||
-                                                    0
+                                                    context.raw || 0
                                                 ).toLocaleString()
                                             );
 
                                         }
-
                                 }
-
                             }
-
                         },
-
 
                         scales: {
 
                             y: {
 
-                                beginAtZero:
-                                    true,
+                                beginAtZero: true,
 
                                 ticks: {
 
@@ -1341,19 +1146,15 @@ async function loadSalesChart() {
                                             );
 
                                         }
-
                                 }
-
                             }
-
                         }
-
                     }
-
                 }
             );
 
     }
+
     catch (error) {
 
         console.error(
@@ -1375,7 +1176,7 @@ async function loadNotifications() {
     try {
 
         const response = await fetch(
-            "/low_stock",
+            "/products",
             {
                 credentials: "include"
             }
@@ -1384,12 +1185,12 @@ async function loadNotifications() {
         if (!response.ok) {
 
             throw new Error(
-                "Unable to load stock alerts"
+                "Unable to load products"
             );
 
         }
 
-        const products =
+        const allProducts =
             await response.json();
 
 
@@ -1397,7 +1198,6 @@ async function loadNotifications() {
             document.getElementById(
                 "notificationList"
             );
-
 
         const notificationCount =
             document.getElementById(
@@ -1409,20 +1209,13 @@ async function loadNotifications() {
             !notificationList ||
             !notificationCount
         ) {
-
             return;
-
         }
 
 
-        /* =================================================
-           INVALID RESPONSE
-        ================================================= */
+        if (!Array.isArray(allProducts)) {
 
-        if (!Array.isArray(products)) {
-
-            notificationCount.innerText =
-                "0";
+            notificationCount.innerText = "0";
 
             notificationList.innerHTML = `
                 <p class="no-notifications">
@@ -1435,18 +1228,31 @@ async function loadNotifications() {
         }
 
 
-        /* =================================================
-           NO ALERTS
-        ================================================= */
+        /* LOW STOCK = 5 OR LESS */
+
+        const products =
+            allProducts.filter(
+                function(product) {
+
+                    return (
+                        Number(
+                            product.stock
+                        ) <= 5
+                    );
+
+                }
+            );
+
+
+        /* NO ALERTS */
 
         if (products.length === 0) {
 
-            notificationCount.innerText =
-                "0";
+            notificationCount.innerText = "0";
 
             notificationList.innerHTML = `
                 <p class="no-notifications">
-                    No stock alerts 🎉
+                    No stock alerts.
                 </p>
             `;
 
@@ -1455,10 +1261,6 @@ async function loadNotifications() {
         }
 
 
-        /* =================================================
-           GET READ NOTIFICATIONS
-        ================================================= */
-
         let readNotifications =
             JSON.parse(
                 localStorage.getItem(
@@ -1466,10 +1268,6 @@ async function loadNotifications() {
                 )
             ) || [];
 
-
-        /* =================================================
-           CURRENT IDS
-        ================================================= */
 
         const currentNotificationIds =
             products.map(
@@ -1504,10 +1302,6 @@ async function loadNotifications() {
         );
 
 
-        /* =================================================
-           FIND UNREAD
-        ================================================= */
-
         const unreadProducts =
             products.filter(
                 function(product) {
@@ -1530,13 +1324,8 @@ async function loadNotifications() {
             unreadProducts.length;
 
 
-        notificationList.innerHTML =
-            "";
+        notificationList.innerHTML = "";
 
-
-        /* =================================================
-           CREATE NOTIFICATIONS
-        ================================================= */
 
         products.forEach(
             function(product) {
@@ -1544,7 +1333,7 @@ async function loadNotifications() {
                 const stock =
                     Number(
                         product.stock
-                    );
+                    ) || 0;
 
 
                 const notificationId =
@@ -1580,9 +1369,7 @@ async function loadNotifications() {
                             data-notification-id="${notificationId}"
                         >
 
-                            <i
-                                class="fa-solid fa-circle-exclamation"
-                            ></i>
+                            <i class="fa-solid fa-circle-exclamation"></i>
 
                             <div>
 
@@ -1615,9 +1402,7 @@ async function loadNotifications() {
                             data-notification-id="${notificationId}"
                         >
 
-                            <i
-                                class="fa-solid fa-triangle-exclamation"
-                            ></i>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
 
                             <div>
 
@@ -1648,9 +1433,7 @@ async function loadNotifications() {
         );
 
 
-        /* =================================================
-           NOTIFICATION CLICK
-        ================================================= */
+        /* CLICK NOTIFICATION */
 
         const notificationItems =
             document.querySelectorAll(
@@ -1679,6 +1462,7 @@ async function loadNotifications() {
 
 
                         if (
+                            id &&
                             !readNotifications
                                 .includes(id)
                         ) {
@@ -1712,6 +1496,7 @@ async function loadNotifications() {
         );
 
     }
+
     catch (error) {
 
         console.error(
@@ -1735,9 +1520,7 @@ function updateNotificationCount() {
             ".notification-item"
         );
 
-
     let unreadCount = 0;
-
 
     notificationItems.forEach(
         function(item) {
@@ -1773,7 +1556,7 @@ function updateNotificationCount() {
 
 
 /* =========================================================
-   MARK ALL NOTIFICATIONS AS READ
+   MARK ALL AS READ
 ========================================================= */
 
 const markAllReadBtn =
@@ -1846,10 +1629,7 @@ if (markAllReadBtn) {
 
 
             if (notificationCount) {
-
-                notificationCount.innerText =
-                    "0";
-
+                notificationCount.innerText = "0";
             }
 
         }
@@ -1866,7 +1646,6 @@ const notificationBtn =
     document.getElementById(
         "notificationBtn"
     );
-
 
 const notificationPanel =
     document.getElementById(
@@ -1958,6 +1737,7 @@ async function logout() {
         );
 
     }
+
     catch (error) {
 
         console.error(
@@ -1982,12 +1762,10 @@ const menuToggle =
         "menuToggle"
     );
 
-
 const sidebar =
     document.getElementById(
         "sidebar"
     );
-
 
 const overlay =
     document.getElementById(
@@ -2002,20 +1780,11 @@ if (menuToggle) {
         function() {
 
             if (sidebar) {
-
-                sidebar.classList.add(
-                    "active"
-                );
-
+                sidebar.classList.add("active");
             }
 
-
             if (overlay) {
-
-                overlay.classList.add(
-                    "active"
-                );
-
+                overlay.classList.add("active");
             }
 
         }
@@ -2031,17 +1800,10 @@ if (overlay) {
         function() {
 
             if (sidebar) {
-
-                sidebar.classList.remove(
-                    "active"
-                );
-
+                sidebar.classList.remove("active");
             }
 
-
-            overlay.classList.remove(
-                "active"
-            );
+            overlay.classList.remove("active");
 
         }
     );
@@ -2098,8 +1860,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   REFRESH DASHBOARD DATA
-   EVERY 60 SECONDS
+   REFRESH
 ========================================================= */
 
 setInterval(

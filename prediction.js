@@ -223,7 +223,7 @@ async function loadSummary() {
             tomorrow.textContent =
                 "₦" +
                 Number(
-                    data.tomorrow_sales || 0
+                    data.tomorrow || 0
                 ).toLocaleString();
 
         }
@@ -243,7 +243,7 @@ async function loadSummary() {
             weekly.textContent =
                 "₦" +
                 Number(
-                    data.week_sales || 0
+                    data.week || 0
                 ).toLocaleString();
 
         }
@@ -263,7 +263,7 @@ async function loadSummary() {
             monthly.textContent =
                 "₦" +
                 Number(
-                    data.month_sales || 0
+                    data.month || 0
                 ).toLocaleString();
 
         }
@@ -275,7 +275,7 @@ async function loadSummary() {
 
         const score =
             Number(
-                data.health ?? 0
+                data.inventory_health ?? 0
             );
 
 

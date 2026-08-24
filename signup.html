@@ -3,16 +3,16 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Account - SalesAI</title>
+    <title>Create Account - SalesNova</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="project.css">
 
-<link rel="stylesheet" href="project.css">
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
 </head>
 
@@ -20,220 +20,676 @@
 <body class="auth-body">
 
 
-<div class="auth-container">
+<div class="auth-page">
 
 
-    <div class="auth-card">
+    <!-- =====================================================
+         LEFT SHOWCASE
+    ====================================================== -->
+
+    <section class="auth-showcase">
+
+        <div class="showcase-content">
 
 
-        <!-- =================================================
-             LOGO
-        ================================================== -->
+            <!-- BRAND -->
 
-        <div class="auth-logo">
-            SalesNova
+            <div class="brand">
+
+                <div class="brand-mark">
+                    S
+                </div>
+
+                <div class="brand-name">
+                    Sales<span>Nova</span>
+                </div>
+
+            </div>
+
+
+            <!-- SHOWCASE TEXT -->
+
+            <div class="showcase-text">
+
+                <span class="showcase-badge">
+                    START YOUR JOURNEY
+                </span>
+
+                <h1>
+                    Turn your sales
+                    <span>into insights.</span>
+                </h1>
+
+                <p>
+                    Create your SalesNova account and get
+                    the tools you need to manage sales,
+                    inventory and business performance.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURES -->
+
+            <div class="signup-features">
+
+
+                <!-- FEATURE 1 -->
+
+                <div class="signup-feature">
+
+                    <div class="feature-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8">
+
+                            <path d="M4 19V5"></path>
+
+                            <path d="M4 19h16"></path>
+
+                            <path
+                                d="M7 15l4-5 3 3 5-7">
+                            </path>
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Track your sales
+                        </strong>
+
+                        <span>
+                            See how your business is performing.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FEATURE 2 -->
+
+                <div class="signup-feature">
+
+                    <div class="feature-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8">
+
+                            <rect
+                                x="3"
+                                y="4"
+                                width="18"
+                                height="16"
+                                rx="2">
+                            </rect>
+
+                            <path d="M8 8h8"></path>
+
+                            <path d="M8 12h8"></path>
+
+                            <path d="M8 16h5"></path>
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Manage inventory
+                        </strong>
+
+                        <span>
+                            Know what needs attention.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FEATURE 3 -->
+
+                <div class="signup-feature">
+
+                    <div class="feature-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8">
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="9">
+                            </circle>
+
+                            <path d="M12 3v18"></path>
+
+                            <path d="M3 12h18"></path>
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Make smarter decisions
+                        </strong>
+
+                        <span>
+                            Use insights to plan ahead.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
         </div>
 
 
-        <!-- =================================================
-             TITLE
-        ================================================== -->
+        <div class="showcase-footer">
 
-        <h1>
-            Create Account
-        </h1>
+            Smart tools for smarter business decisions.
 
-
-        <p>
-            Build smarter sales decisions with AI.
-        </p>
-
-
-        <!-- =================================================
-             MESSAGE
-        ================================================== -->
-
-        <div
-            id="message"
-            class="auth-message">
         </div>
 
-
-        <!-- =================================================
-             SIGN UP FORM
-        ================================================== -->
-
-        <form id="signupForm">
+    </section>
 
 
-            <!-- FULL NAME -->
 
-            <div class="form-group">
+    <!-- =====================================================
+         RIGHT SIGNUP PANEL
+    ====================================================== -->
 
-                <label>
-                    Full Name
-                </label>
-
-                <input
-                    type="text"
-                    id="fullname"
-                    placeholder="Enter your full name"
-                    required>
-
-            </div>
+    <section class="auth-panel">
 
 
-            <!-- BUSINESS NAME -->
-
-            <div class="form-group">
-
-                <label>
-                    Business Name
-                </label>
-
-                <input
-                    type="text"
-                    id="business"
-                    placeholder="Enter your business name"
-                    required>
-
-            </div>
+        <div class="auth-form-container">
 
 
-            <!-- EMAIL -->
+            <!-- MOBILE BRAND -->
 
-            <div class="form-group">
+            <div class="mobile-brand">
 
-                <label>
-                    Email Address
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    required>
-
-            </div>
-
-
-            <!-- PASSWORD -->
-
-            <div class="form-group">
-
-                <label>
-                    Password
-                </label>
-
-
-                <div class="password-wrapper">
-
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Create password"
-                        required>
-
-
-                    <span
-                        class="toggle-password"
-                        onclick="togglePassword('password', this)">
-                        👁
-                    </span>
-
+                <div class="brand-mark">
+                    S
                 </div>
 
-
-                <div class="password-strength">
-
-                    <span id="strengthBar"></span>
-
-                </div>
-
-
-                <div
-                    class="password-text"
-                    id="strengthText">
-
-                    Password strength
-
+                <div class="brand-name">
+                    Sales<span>Nova</span>
                 </div>
 
             </div>
 
 
-            <!-- CONFIRM PASSWORD -->
 
-            <div class="form-group">
+            <!-- HEADING -->
 
-                <label>
-                    Confirm Password
-                </label>
+            <div class="auth-heading">
 
+                <span class="auth-welcome">
+                    GET STARTED
+                </span>
 
-                <div class="password-wrapper">
+                <h2>
+                    Create your account
+                </h2>
 
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        placeholder="Confirm password"
-                        required>
-
-
-                    <span
-                        class="toggle-password"
-                        onclick="togglePassword('confirmPassword', this)">
-                        👁
-                    </span>
-
-                </div>
+                <p>
+                    Set up your account and start managing your business.
+                </p>
 
             </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="message"
+                class="auth-message">
+            </div>
+
 
 
             <!-- =================================================
-                 CREATE ACCOUNT BUTTON
+                 SIGNUP FORM
             ================================================== -->
 
-            <button
-                type="submit"
-                class="auth-btn"
-                id="signupBtn">
+            <form id="signupForm">
 
 
-                <div
-                    class="spinner"
-                    id="spinner">
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="fullname">
+                        Full Name
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <circle
+                                    cx="12"
+                                    cy="8"
+                                    r="4">
+                                </circle>
+
+                                <path
+                                    d="M4 21c0-4 3.5-7 8-7s8 3 8 7">
+                                </path>
+
+                            </svg>
+
+                        </span>
+
+
+                        <input
+                            type="text"
+                            id="fullname"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required>
+
+                    </div>
+
                 </div>
 
 
-                <span id="btnText">
-                    Create Account
-                </span>
+
+                <!-- BUSINESS NAME -->
+
+                <div class="form-group">
+
+                    <label for="business">
+                        Business Name
+                    </label>
 
 
-            </button>
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <path
+                                    d="M3 21h18">
+                                </path>
+
+                                <path
+                                    d="M5 21V5l7-3 7 3v16">
+                                </path>
+
+                                <path
+                                    d="M9 21v-5h6v5">
+                                </path>
+
+                            </svg>
+
+                        </span>
 
 
-        </form>
+                        <input
+                            type="text"
+                            id="business"
+                            placeholder="Enter your business name"
+                            autocomplete="organization"
+                            required>
+
+                    </div>
+
+                </div>
 
 
-        <!-- =================================================
-             LOGIN LINK
-        ================================================== -->
 
-        <div class="auth-link">
+                <!-- EMAIL -->
 
-            Already have an account?
+                <div class="form-group">
 
-            <a href="login.html">
-                Login
-            </a>
+                    <label for="email">
+                        Email Address
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <rect
+                                    x="3"
+                                    y="5"
+                                    width="18"
+                                    height="14"
+                                    rx="2">
+                                </rect>
+
+                                <path
+                                    d="M3 7l9 6 9-6">
+                                </path>
+
+                            </svg>
+
+                        </span>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <rect
+                                    x="4"
+                                    y="10"
+                                    width="16"
+                                    height="11"
+                                    rx="2">
+                                </rect>
+
+                                <path
+                                    d="M8 10V7a4 4 0 018 0v3">
+                                </path>
+
+                            </svg>
+
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required>
+
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            onclick="togglePassword('password', this)"
+                            aria-label="Show password">
+
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <path
+                                    d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z">
+                                </path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="2.5">
+                                </circle>
+
+                            </svg>
+
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD STRENGTH -->
+
+                    <div class="password-strength">
+
+                        <span id="strengthBar"></span>
+
+                    </div>
+
+
+                    <div
+                        class="password-text"
+                        id="strengthText">
+
+                        Password strength
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <rect
+                                    x="4"
+                                    y="10"
+                                    width="16"
+                                    height="11"
+                                    rx="2">
+                                </rect>
+
+                                <path
+                                    d="M8 10V7a4 4 0 018 0v3">
+                                </path>
+
+                            </svg>
+
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            required>
+
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            onclick="togglePassword('confirmPassword', this)"
+                            aria-label="Show password">
+
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+
+                                <path
+                                    d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z">
+                                </path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="2.5">
+                                </circle>
+
+                            </svg>
+
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CREATE ACCOUNT BUTTON -->
+
+                <button
+                    type="submit"
+                    class="auth-btn"
+                    id="signupBtn">
+
+
+                    <span
+                        class="spinner"
+                        id="spinner">
+                    </span>
+
+
+                    <span id="btnText">
+                        Create Account
+                    </span>
+
+
+                    <svg
+                        class="btn-arrow"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2">
+
+                        <path d="M5 12h14"></path>
+
+                        <path d="M13 6l6 6-6 6"></path>
+
+                    </svg>
+
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- =================================================
+                 LOGIN LINK
+            ================================================== -->
+
+            <div class="signup-login-link">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </div>
+
+
+
+            <!-- SECURITY NOTE -->
+
+            <p class="security-note">
+
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8">
+
+                    <rect
+                        x="5"
+                        y="10"
+                        width="14"
+                        height="11"
+                        rx="2">
+                    </rect>
+
+                    <path
+                        d="M8 10V7a4 4 0 018 0v3">
+                    </path>
+
+                </svg>
+
+
+                Your account information is securely protected.
+
+
+            </p>
+
 
         </div>
 
-
-    </div>
+    </section>
 
 </div>
 
@@ -242,11 +698,11 @@
 <script>
 
 
-// =========================================================
-// SHOW / HIDE PASSWORD
-// =========================================================
+/* =========================================================
+   PASSWORD VISIBILITY
+========================================================= */
 
-function togglePassword(id, icon) {
+function togglePassword(id, button) {
 
     const input =
         document.getElementById(id);
@@ -257,19 +713,77 @@ function togglePassword(id, icon) {
     }
 
 
-    if (input.type === "password") {
+    const isPassword =
+        input.type === "password";
 
-        input.type = "text";
 
-        icon.innerHTML = "🙈";
+    input.type =
+        isPassword
+            ? "text"
+            : "password";
+
+
+    button.setAttribute(
+        "aria-label",
+        isPassword
+            ? "Hide password"
+            : "Show password"
+    );
+
+
+    if (isPassword) {
+
+        button.innerHTML = `
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8">
+
+                <path d="M3 3l18 18"></path>
+
+                <path
+                    d="M10.6 10.6a2 2 0 002.8 2.8">
+                </path>
+
+                <path
+                    d="M9.9 5.1A9.8 9.8 0 0112 5c6.5 0 10 7 10 7a18.5 18.5 0 01-3.2 4.1">
+                </path>
+
+                <path
+                    d="M6.1 6.1C3.4 8.1 2 12 2 12s3.5 7 10 7a9.8 9.8 0 004.1-.9">
+                </path>
+
+            </svg>
+
+        `;
 
     }
 
     else {
 
-        input.type = "password";
+        button.innerHTML = `
 
-        icon.innerHTML = "👁";
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8">
+
+                <path
+                    d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z">
+                </path>
+
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="2.5">
+                </circle>
+
+            </svg>
+
+        `;
 
     }
 
@@ -277,9 +791,9 @@ function togglePassword(id, icon) {
 
 
 
-// =========================================================
-// PASSWORD STRENGTH
-// =========================================================
+/* =========================================================
+   PASSWORD STRENGTH
+========================================================= */
 
 const passwordInput =
     document.getElementById("password");
@@ -307,34 +821,20 @@ if (passwordInput) {
             let score = 0;
 
 
-            // At least 8 characters
-
             if (value.length >= 8) {
-
                 score++;
-
             }
 
-
-            // Uppercase
 
             if (/[A-Z]/.test(value)) {
-
                 score++;
-
             }
 
-
-            // Number
 
             if (/[0-9]/.test(value)) {
-
                 score++;
-
             }
 
-
-            // Special character
 
             if (
                 /[!@#$%^&*(),.?":{}|<>]/.test(value)
@@ -348,11 +848,9 @@ if (passwordInput) {
             strengthBar.className = "";
 
 
-            // Empty password
-
             if (value.length === 0) {
 
-                strengthText.innerHTML =
+                strengthText.textContent =
                     "Password strength";
 
                 return;
@@ -360,21 +858,16 @@ if (passwordInput) {
             }
 
 
-            // Weak
-
             if (score <= 1) {
 
                 strengthBar.classList.add(
                     "weak"
                 );
 
-                strengthText.innerHTML =
-                    "Weak Password";
+                strengthText.textContent =
+                    "Weak password";
 
             }
-
-
-            // Medium
 
             else if (score <= 3) {
 
@@ -382,13 +875,10 @@ if (passwordInput) {
                     "medium"
                 );
 
-                strengthText.innerHTML =
-                    "Medium Password";
+                strengthText.textContent =
+                    "Medium password";
 
             }
-
-
-            // Strong
 
             else {
 
@@ -396,8 +886,8 @@ if (passwordInput) {
                     "strong"
                 );
 
-                strengthText.innerHTML =
-                    "Strong Password";
+                strengthText.textContent =
+                    "Strong password";
 
             }
 
@@ -408,14 +898,11 @@ if (passwordInput) {
 
 
 
-// =========================================================
-// SHOW MESSAGE
-// =========================================================
+/* =========================================================
+   SHOW MESSAGE
+========================================================= */
 
-function showMessage(
-    type,
-    messageText
-) {
+function showMessage(type, text) {
 
 
     const message =
@@ -448,8 +935,8 @@ function showMessage(
     }
 
 
-    message.innerHTML =
-        messageText;
+    message.textContent =
+        text;
 
 
     message.style.display =
@@ -459,9 +946,9 @@ function showMessage(
 
 
 
-// =========================================================
-// SIGN UP
-// =========================================================
+/* =========================================================
+   SIGN UP
+========================================================= */
 
 const signupForm =
     document.getElementById("signupForm");
@@ -476,10 +963,6 @@ if (signupForm) {
 
             e.preventDefault();
 
-
-            // -------------------------------------------------
-            // GET FORM VALUES
-            // -------------------------------------------------
 
             const fullname =
                 document
@@ -515,52 +998,38 @@ if (signupForm) {
                     .value;
 
 
+            const message =
+                document.getElementById("message");
+
+
             const spinner =
-                document.getElementById(
-                    "spinner"
-                );
+                document.getElementById("spinner");
 
 
             const signupBtn =
-                document.getElementById(
-                    "signupBtn"
-                );
+                document.getElementById("signupBtn");
 
 
             const btnText =
-                document.getElementById(
-                    "btnText"
-                );
+                document.getElementById("btnText");
 
 
-            // -------------------------------------------------
-            // HIDE OLD MESSAGE
-            // -------------------------------------------------
+            /* HIDE OLD MESSAGE */
 
-            const message =
-                document.getElementById(
-                    "message"
-                );
+            message.style.display =
+                "none";
 
 
-            if (message) {
-
-                message.style.display =
-                    "none";
-
-            }
-
-
-            // =================================================
-            // BASIC VALIDATION
-            // =================================================
+            /* =================================================
+               BASIC VALIDATION
+            ================================================= */
 
             if (
-                fullname === "" ||
-                business === "" ||
-                email === "" ||
-                password === "" ||
-                confirmPassword === ""
+                !fullname ||
+                !business ||
+                !email ||
+                !password ||
+                !confirmPassword
             ) {
 
                 showMessage(
@@ -573,19 +1042,19 @@ if (signupForm) {
             }
 
 
-            // =================================================
-            // EMAIL VALIDATION
-            // =================================================
+            /* =================================================
+               EMAIL VALIDATION
+            ================================================= */
 
             const emailPattern =
-                /^[A-Za-z0-9._%+-]+@gmail\.com$/i;
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
             if (!emailPattern.test(email)) {
 
                 showMessage(
                     "error",
-                    "Please enter a valid Gmail address."
+                    "Please enter a valid email address."
                 );
 
                 return;
@@ -593,9 +1062,25 @@ if (signupForm) {
             }
 
 
-            // =================================================
-            // PASSWORD MATCH
-            // =================================================
+            /* =================================================
+               PASSWORD LENGTH
+            ================================================= */
+
+            if (password.length < 8) {
+
+                showMessage(
+                    "error",
+                    "Password must contain at least 8 characters."
+                );
+
+                return;
+
+            }
+
+
+            /* =================================================
+               PASSWORD MATCH
+            ================================================= */
 
             if (
                 password !== confirmPassword
@@ -611,60 +1096,32 @@ if (signupForm) {
             }
 
 
-            // =================================================
-            // PASSWORD LENGTH
-            // =================================================
+            /* =================================================
+               LOADING
+            ================================================= */
 
-            if (password.length < 8) {
-
-                showMessage(
-                    "error",
-                    "Password must contain at least 8 characters."
-                );
-
-                return;
-
-            }
+            spinner.style.display =
+                "block";
 
 
-            // =================================================
-            // START LOADING
-            // =================================================
-
-            if (spinner) {
-
-                spinner.style.display =
-                    "block";
-
-            }
+            signupBtn.disabled =
+                true;
 
 
-            if (signupBtn) {
-
-                signupBtn.disabled =
-                    true;
-
-            }
+            btnText.textContent =
+                "Creating Account...";
 
 
-            if (btnText) {
-
-                btnText.innerHTML =
-                    "Creating Account...";
-
-            }
-
-
-            // =================================================
-            // SEND REQUEST TO FLASK
-            // =================================================
+            /* =================================================
+               SEND TO FLASK
+            ================================================= */
 
             try {
 
 
                 const response =
                     await fetch(
-    "/register",
+                        "/register",
                         {
 
                             method: "POST",
@@ -672,33 +1129,36 @@ if (signupForm) {
                             credentials: "include",
 
                             headers: {
+
                                 "Content-Type":
                                     "application/json"
+
                             },
 
-                            body: JSON.stringify({
+                            body:
+                                JSON.stringify({
 
-                                fullname:
-                                    fullname,
+                                    fullname:
+                                        fullname,
 
-                                business:
-                                    business,
+                                    business:
+                                        business,
 
-                                email:
-                                    email,
+                                    email:
+                                        email,
 
-                                password:
-                                    password
+                                    password:
+                                        password
 
-                            })
+                                })
 
                         }
                     );
 
 
-                // =================================================
-                // READ SERVER RESPONSE
-                // =================================================
+                /* =================================================
+                   READ RESPONSE
+                ================================================= */
 
                 let result = {};
 
@@ -727,9 +1187,9 @@ if (signupForm) {
                 );
 
 
-                // =================================================
-                // SUCCESS
-                // =================================================
+                /* =================================================
+                   SUCCESS
+                ================================================= */
 
                 if (
                     response.ok &&
@@ -738,20 +1198,12 @@ if (signupForm) {
                 ) {
 
 
-                    if (spinner) {
-
-                        spinner.style.display =
-                            "none";
-
-                    }
+                    spinner.style.display =
+                        "none";
 
 
-                    if (btnText) {
-
-                        btnText.innerHTML =
-                            "Account Created";
-
-                    }
+                    btnText.textContent =
+                        "Account Created";
 
 
                     showMessage(
@@ -760,9 +1212,15 @@ if (signupForm) {
                     );
 
 
+                    setTimeout(
+                        function () {
 
-                    window.location.href =
-                        "/login.html";
+                            window.location.href =
+                                "/login.html";
+
+                        },
+                        900
+                    );
 
 
                     return;
@@ -770,32 +1228,20 @@ if (signupForm) {
                 }
 
 
-                // =================================================
-                // REGISTRATION FAILED
-                // =================================================
+                /* =================================================
+                   REGISTRATION FAILED
+                ================================================= */
 
-                if (spinner) {
-
-                    spinner.style.display =
-                        "none";
-
-                }
+                spinner.style.display =
+                    "none";
 
 
-                if (signupBtn) {
-
-                    signupBtn.disabled =
-                        false;
-
-                }
+                signupBtn.disabled =
+                    false;
 
 
-                if (btnText) {
-
-                    btnText.innerHTML =
-                        "Create Account";
-
-                }
+                btnText.textContent =
+                    "Create Account";
 
 
                 showMessage(
@@ -807,9 +1253,9 @@ if (signupForm) {
             }
 
 
-            // =================================================
-            // CONNECTION ERROR
-            // =================================================
+            /* =================================================
+               CONNECTION ERROR
+            ================================================= */
 
             catch (error) {
 
@@ -820,33 +1266,21 @@ if (signupForm) {
                 );
 
 
-                if (spinner) {
-
-                    spinner.style.display =
-                        "none";
-
-                }
+                spinner.style.display =
+                    "none";
 
 
-                if (signupBtn) {
-
-                    signupBtn.disabled =
-                        false;
-
-                }
+                signupBtn.disabled =
+                    false;
 
 
-                if (btnText) {
-
-                    btnText.innerHTML =
-                        "Create Account";
-
-                }
+                btnText.textContent =
+                    "Create Account";
 
 
                 showMessage(
                     "error",
-                    "Unable to connect to the server. Make sure your Flask backend is running."
+                    "Unable to connect to the server. Please try again."
                 );
 
             }
@@ -856,10 +1290,8 @@ if (signupForm) {
 
 }
 
-
 </script>
 
 
 </body>
-
 </html>
